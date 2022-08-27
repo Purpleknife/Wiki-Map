@@ -94,12 +94,23 @@ const addMap = (map) => {
 };
 exports.addMap = addMap;
 
-const updateMap = (options) => {
+const updateMap = (map_id, options) => {
 
-  queryString = `
-  ALTER TABLE maps
-
+  // Can update options.title, and...
+  let queryParams = [map_id, options];
+  let queryString = `
+  UPDATE maps
+  SET title = $2
+  WHERE maps.id = $1
+  RETURNING *;
   `;
+
+  db.query(queryString, queryParams)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows[0];
+    })
+    .catch(error => console.log(error.message));
 
 };
 exports.updateMap = updateMap;

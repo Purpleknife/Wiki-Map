@@ -8,8 +8,6 @@
 const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
-const mapQueries = require('../db/queries/maps');
-const pinQueries = require('../db/queries/pins');
 
 router.get('/', (req, res) => {
   userQueries.getUsers()

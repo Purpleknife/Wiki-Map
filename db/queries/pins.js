@@ -24,22 +24,47 @@ const getPinsForMapById = (map_id) => {
 exports.getPinsForMapById = getPinsForMapById;
 
 
-const updatePins = (options) => {
+const updatePins = (pin_id, options) => {
 
-  const { title, description, image, latitude, longitude, map_id } = options;
+  // Can update title, description, image...
+  let queryParams = [];
+  let queryString = `
+  UPDATE pins `;
 
-  const queryParams = [];
-  const queryString = `
+  if (options.title) {
+    queryParams.push(`${options.title}`);
+    queryString +=
+    `SET title = $${queryParams.length} `;
+  }
 
-  `;
+  if (options.description) {
+    queryParams.push(`${options.description}`);
+    queryString += queryParams.length > 1 ?
+    `, description = $${queryParams.length} ` :
+    `SET description = $${queryParams.length} `;
+  }
 
-  return db.query(queryString, queryParams)
-  .then(data => {
-    return data.rows;
-  })
-  .catch(error => console.log(error.message));
+  if (options.image) {
+    queryParams.push(`${options.image}`);
+    queryString += queryParams.length > 1 ?
+    `, image = $${queryParams.length} ` :
+    `SET image = $${queryParams.length} `;
+  }
+
+  queryParams.push(pin_id);
+  queryString += `
+  WHERE pins.id = $${queryParams.length}
+  RETURNING *;`;
+
+  db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(error => console.log(error.message));
+
 }
 exports.updatePins = updatePins;
+
 
 const addPin = (pin) => {
 
