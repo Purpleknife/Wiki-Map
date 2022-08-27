@@ -1,4 +1,24 @@
+const { get } = require('../../routes/users-api');
 const db = require('../connection');
+
+const getMapById = (map_id) => {
+
+  const queryParams = [map_id];
+  const queryString = `
+  SELECT *
+  FROM maps
+  WHERE maps.id = $1;
+  `;
+
+  db.query(queryString, queryParams)
+    .then(data => {
+      console.log(data.rows)
+      return data.rows;
+    })
+    .catch(error => console.log(error.message));
+
+};
+exports.getMapById = getMapById;
 
 const getAllMaps = (options, limit = 10) => {
 
@@ -79,8 +99,7 @@ const deleteFavMap = (map) => {
 
   db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows[0])
-      return data.rows[0];
+      return data.rows;
     })
     .catch(error => console.log(error.message));
 

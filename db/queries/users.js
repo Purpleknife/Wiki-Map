@@ -102,3 +102,40 @@ const addUser = (user) => {
 };
 exports.addUser = addUser;
 
+const getUserMaps = (user_id) => {
+
+  const queryParams = [user_id];
+  const queryString = `
+  SELECT *
+  FROM maps
+  WHERE user_id = $1;
+  `;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(error => console.log(error.message));
+
+};
+exports.getUserMaps = getUserMaps;
+
+
+const getUserFavs = (user_id) => {
+
+  const queryParams = [user_id];
+  const queryString = `
+  SELECT *
+  FROM favorite_maps
+  WHERE user_id = $1
+  AND removed_at IS NULL;
+  `;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(error => console.log(error.message));
+
+};
+exports.getUserFavs = getUserFavs;
