@@ -1,5 +1,10 @@
 const db = require('../connection');
 
+/**
+ *
+ * @param {*} map_id to search for
+ * @returns Promise<{}> object containing map found
+ */
 const getMapById = (map_id) => {
 
   const queryParams = [map_id];
@@ -9,9 +14,8 @@ const getMapById = (map_id) => {
   WHERE maps.id = $1;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows)
       return data.rows;
     })
     .catch(error => console.log(error.message));
@@ -19,6 +23,12 @@ const getMapById = (map_id) => {
 };
 exports.getMapById = getMapById;
 
+/**
+ *
+ * @param {*} options can search by title, city, province, and/or user
+ * @param {*} limit of db elements to return
+ * @returns Promise<{}> array of objects containing maps found
+ */
 const getAllMaps = (options, limit = 10) => {
 
   // can search by title, city, province, user
@@ -58,11 +68,8 @@ const getAllMaps = (options, limit = 10) => {
   queryParams.push(limit);
   queryString += `LIMIT $${queryParams.length};`;
 
-  console.log(queryString, queryParams);
-
   return db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows);
       return data.rows;
     })
     .catch(error => console.log(error.message));
@@ -72,7 +79,8 @@ exports.getAllMaps = getAllMaps;
 
 /**
  *
- * @param {*} map
+ * @param {{}} map object to add. Requires: user_id, title, latitude, longitude, city, province
+ * @returns Promise<{}> object of map added
  */
 const addMap = (map) => {
 
@@ -85,7 +93,7 @@ const addMap = (map) => {
   RETURNING *;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
       return data.rows[0];
     })
@@ -93,7 +101,12 @@ const addMap = (map) => {
 
 };
 exports.addMap = addMap;
-
+ /**
+  *
+  * @param {*} map_id to update
+  * @param {*} options can be: title
+  * @returns Promise<{}> object of updated map
+  */
 const updateMap = (map_id, options) => {
 
   // Can update options.title, and...
@@ -105,9 +118,8 @@ const updateMap = (map_id, options) => {
   RETURNING *;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows)
       return data.rows[0];
     })
     .catch(error => console.log(error.message));
@@ -117,7 +129,8 @@ exports.updateMap = updateMap;
 
 /**
  *
- * @param {{}} map object of user_id and map_id
+ * @param {{}} map object containing user_id, map_id
+ * @returns Promise<{}> object of new fav map
  */
 const addFavMap = (map) => {
 
@@ -130,9 +143,8 @@ const addFavMap = (map) => {
   RETURNING *;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
-      console.log(data.rows[0])
       return data.rows[0];
     })
     .catch(error => console.log(error.message));
@@ -140,6 +152,11 @@ const addFavMap = (map) => {
 };
 exports.addFavMap = addFavMap;
 
+/**
+ *
+ * @param {{}} map object containing user_id, map_id
+ * @returns Promise<{}> object of map removed from favorites
+ */
 const deleteFavMap = (map) => {
 
   const { user_id, map_id } = map;
@@ -151,7 +168,7 @@ const deleteFavMap = (map) => {
   WHERE user_id = $1 AND map_id = $2;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
       return data.rows;
     })

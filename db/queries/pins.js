@@ -16,14 +16,18 @@ const getPinsForMapById = (map_id) => {
 
   return db.query(queryString, queryParams)
   .then(data => {
-    console.log(data.rows)
     return data.rows;
   })
   .catch(error => console.log(error.message));
 }
 exports.getPinsForMapById = getPinsForMapById;
 
-
+/**
+ *
+ * @param {*} pin_id of pin to update
+ * @param {*} options [title, description, image]
+ * @returns Promise<{}> object of pin updated
+ */
 const updatePins = (pin_id, options) => {
 
   // Can update title, description, image...
@@ -56,7 +60,7 @@ const updatePins = (pin_id, options) => {
   WHERE pins.id = $${queryParams.length}
   RETURNING *;`;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
       return data.rows[0];
     })
@@ -65,7 +69,11 @@ const updatePins = (pin_id, options) => {
 }
 exports.updatePins = updatePins;
 
-
+/**
+ *
+ * @param {{}} pin object to add requires: title, description, image, latitude, longitude, map_id
+ * @returns Promise<{}> object of pin added
+ */
 const addPin = (pin) => {
 
   const { title, description, image, latitude, longitude, map_id } = pin;
@@ -77,7 +85,7 @@ const addPin = (pin) => {
   RETURNING *;
   `;
 
-  db.query(queryString, queryParams)
+  return db.query(queryString, queryParams)
     .then(data => {
       return data.rows[0];
     })

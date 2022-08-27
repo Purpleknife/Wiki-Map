@@ -2,7 +2,7 @@ const db = require('../connection');
 
 /**
  *
- * @param {*} userId
+ * @param {*} userId to search for
  * @returns Promise<{}> object with user info
  */
 const getUsersById = (userId) => {
@@ -24,7 +24,7 @@ exports.getUsersById = getUsersById;
 
 /**
  *
- * @param {*} username to search for
+ * @param {string} username to search for
  * @returns Promise<[{}]> object with user info
  */
 const getUsersByUsername = (username) => {
@@ -46,7 +46,7 @@ exports.getUsersByUsername = getUsersByUsername;
 
 /**
  *
- * @param {string} email
+ * @param {string} email to search for
  * @returns Promise<[{}]> object with user info
  */
 const getUsersByEmail = (email) => {
@@ -65,6 +65,7 @@ const getUsersByEmail = (email) => {
     .catch(error => console.log(error.message));
 };
 exports.getUsersByEmail = getUsersByEmail;
+
 /**
  *
  * @param {{}} user object with required info (username, email, password, city, province)
@@ -102,6 +103,11 @@ const addUser = (user) => {
 };
 exports.addUser = addUser;
 
+/**
+ *
+ * @param {*} user_id to search maps for
+ * @returns Promise<[{}]> array of objects found in db
+ */
 const getUserMaps = (user_id) => {
 
   const queryParams = [user_id];
@@ -120,7 +126,11 @@ const getUserMaps = (user_id) => {
 };
 exports.getUserMaps = getUserMaps;
 
-
+/**
+ *
+ * @param {*} user_id to search favorite_maps for
+ * @returns Promise<[{}]> array of objects with all users favorited maps
+ */
 const getUserFavs = (user_id) => {
 
   const queryParams = [user_id];
