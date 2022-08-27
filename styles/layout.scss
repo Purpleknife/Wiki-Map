@@ -1,6 +1,19 @@
 // See: https://sass-lang.com/
+@import 'variables';
 
 body,
 html {
   margin: 0;
+}
+
+#map { height: 180px; }
+
+header {
+  background-size: cover;
+  height:480px;
+  padding-top:80px;
+}
+
+.home-page-msg {
+  color: #9f8f9d;
 }
