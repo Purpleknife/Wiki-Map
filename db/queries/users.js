@@ -9,12 +9,12 @@ const getUsersById = (userId) => {
   WHERE users.id = $1;
   `;
 
-
-
-  // return db.query('SELECT * FROM users;')
-  //   .then(data => {
-  //     return data.rows;
-  //   });
+  return db.query(queryString, queryParams)
+    .then(data => {
+      console.log(data.rows);
+      // return data.rows;
+    })
+    .catch(error => console.log(error.message));
 };
-
-module.exports = { getUsers };
+module.exports = { getUsersById };
+getUsersById(1);
