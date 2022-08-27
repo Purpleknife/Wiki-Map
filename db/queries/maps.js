@@ -1,4 +1,3 @@
-const { get } = require('../../routes/users-api');
 const db = require('../connection');
 
 const getMapById = (map_id) => {
@@ -22,7 +21,51 @@ exports.getMapById = getMapById;
 
 const getAllMaps = (options, limit = 10) => {
 
+  // can search by title, city, province, user
 
+  let queryParams = [];
+  let queryString = `
+  SELECT *
+  FROM maps
+  `;
+
+  if (options.user_id) {
+    queryParams.push(options.user_id);
+    queryString += `WHERE user_id = $${queryParams.length} `;
+  }
+
+  if (options.title) {
+    queryParams.push(`%${options.title}%`);
+    queryString += queryParams.length > 1 ?
+    `AND title LIKE $${queryParams.length} ` :
+    `WHERE title LIKE $${queryParams.length} `;
+  }
+
+  if (options.city) {
+    queryParams.push(`%${options.city}%`);
+    queryString += queryParams.length > 1 ?
+    `AND city LIKE $${queryParams.length} ` :
+    `WHERE city LIKE $${queryParams.length} `;
+  }
+
+  if (options.province) {
+    queryParams.push(`%${options.province}%`);
+    queryString += queryParams.length > 1 ?
+    `AND province LIKE $${queryParams.length} ` :
+    `WHERE province LIKE $${queryParams.length} `;
+  }
+
+  queryParams.push(limit);
+  queryString += `LIMIT $${queryParams.length};`;
+
+  console.log(queryString, queryParams);
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      console.log(data.rows);
+      return data.rows;
+    })
+    .catch(error => console.log(error.message));
 
 };
 exports.getAllMaps = getAllMaps;
