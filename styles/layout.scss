@@ -6,14 +6,128 @@ html {
   margin: 0;
 }
 
-#map { height: 180px; }
 
 header {
+  background-image: url('/images/cover_photo.jpg');
   background-size: cover;
   height:480px;
   padding-top:80px;
+
+
+  .home-page-msg {
+    color: $secondary-color;
+    padding-top: 25em;
+    font-family: $secondary-font;
+  }
 }
 
-.home-page-msg {
-  color: #9f8f9d;
+.logo {
+  font-family: $primary-font;
+  color: white;
+  font-size: 30px;
+
+}
+
+.container {
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.search-bar {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  border-radius: 60px;
+  padding: 10px 20px;
+  backdrop-filter: blur(4px) saturate(180%);
+
+  input {
+    background-color: rgba(216,207,200,255);
+    border-radius: 60px;
+    flex: 1;
+    border: 0;
+    outline: none;
+    padding: 24px 20px;
+    font-size: 20px;
+  }
+
+  ::placeholder {
+    color: white;
+  }
+
+  button span {
+    width: 25px;
+  }
+
+  button {
+    border: 0;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    cursor: pointer;
+  }
+}
+
+
+#nav-bar {
+  display: flex;
+  height: 100px;
+  width: 100%;
+  background-color: $primary-background-color;
+  color: black;
+  padding-right: 1.5em;
+  padding-left: 1.5em;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  position: fixed;
+
+  #angle-down-icon {
+    color: $secondary-color;
+    margin-left: 50%;
+    margin-top: 0.5em;
+  }
+
+  #angle-down-icon:hover {
+    position: relative;
+    bottom: -10px;
+    cursor: pointer;
+  }
+}
+
+.maps {
+  padding-left: 7em;
+  padding-right: 7em;
+}
+
+#mapid1 {
+  height: 180px;
+  padding: 0;
+	margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#mapid2 {
+  height: 180px;
+  padding: 0;
+	margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#mapid3 {
+  height: 180px;
+  padding: 0;
+	margin: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
