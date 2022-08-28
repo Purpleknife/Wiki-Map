@@ -30,3 +30,24 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(mapIdThree);
 
 const markerThree = L.marker([51.5, -0.09]).addTo(mapIdThree);
+
+
+//For drop down menu in search bar:
+
+const select = document.getElementById('select');
+const list = document.getElementById('list');
+const selectText = document.getElementById('selectText');
+const inputField = document.getElementById('inputField');
+const options = document.getElementsByClassName('options');
+
+select.onclick = function() {
+  list.classList.toggle('open');
+}
+
+for (option of options) {
+  option.onclick = function() {
+    selectText.innerHTML = this.innerHTML;
+    inputField.placeholder = `Search in ${selectText.innerHTML}...`;
+  }
+}
+

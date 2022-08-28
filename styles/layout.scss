@@ -30,49 +30,74 @@ header {
 
 .container {
 
+
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-
 .search-bar {
-  width: 100%;
-  max-width: 700px;
-  background: rgba(255, 255, 255, 0.2);
+  background: rgba(216,207,200,255);
+  width: 90%;
+  height: 5em;
+  max-width: 800px;
   display: flex;
   align-items: center;
-  border-radius: 60px;
-  padding: 10px 20px;
-  backdrop-filter: blur(4px) saturate(180%);
-
-  input {
-    background-color: rgba(216,207,200,255);
-    border-radius: 60px;
-    flex: 1;
-    border: 0;
-    outline: none;
-    padding: 24px 20px;
-    font-size: 20px;
-  }
-
-  ::placeholder {
-    color: white;
-  }
-
-  button span {
-    width: 25px;
-  }
-
-  button {
-    border: 0;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-    cursor: pointer;
-  }
+  padding: 2px;
+  border-radius: 4px;
+  padding-right: 1em;
 }
 
+#select {
+  background-color: rgba(216,207,200,255);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: #fff;
+  width: 300px;
+  padding: 25px 20px;
+  cursor: pointer;
+  position: relative;
+  border-radius: 4px;
+  height: 5em;
+  padding-left: 1.5em;
+  padding-top: 2.5em;
+}
+
+#select ul {
+  position: absolute;
+  top: 120%;
+  left: 0;
+  list-style: none;
+  background: rgba(216,207,200,255);
+  color: grey;
+  width: 100%;
+  border-radius: 4px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.5s;
+}
+
+#select ul.open {
+  max-height: 200px;
+}
+
+#img {
+  padding-bottom: 1.2em;
+}
+
+#select ul li {
+  padding: 5px 5px;
+  cursor: pointer;
+}
+
+.search-bar input {
+  padding: 10px 25px;
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 18px;
+}
 
 #nav-bar {
   display: flex;
