@@ -29,11 +29,11 @@ header {
 }
 
 .container {
-
-
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: $secondary-font;
+
 }
 
 .search-bar {
@@ -125,9 +125,18 @@ header {
   }
 }
 
+#maps-title {
+
+  display: flex;
+  justify-content: center;
+  font-size: larger;
+  font-family: $secondary-font;
+}
+
 .maps {
   padding-left: 7em;
   padding-right: 7em;
+  max-height: 180px;
 }
 
 #mapid1 {
