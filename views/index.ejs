@@ -81,8 +81,15 @@
         <div id="mapid1"></div>
         <div class="card-body">
           <p class="card-text"><b>Map:</b> Best Places to eat around Town<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-          <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          <form method="GET" action="/maps/<%= id %>/">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+          <form method="GET" action="/maps/<%= id %>/edit">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          </form>
+          <form method="POST" action="/maps/<%= id %>?_method=DELETE">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+          </form>
         </div>
       </div>
     </div>
@@ -91,8 +98,15 @@
         <div id="mapid2"></div>
         <div class="card-body">
           <p class="card-text"><b>Map:</b> Best Mountains to Hike<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-          <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-          <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          <form method="GET" action="/maps/<%= id %>/">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+          <form method="GET" action="/maps/<%= id %>/edit">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          </form>
+          <form method="POST" action="/maps/<%= id %>?_method=DELETE">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+          </form>
         </div>
       </div>
     </div>
@@ -101,8 +115,15 @@
         <div id="mapid3"></div>
         <div class="card-body">
           <p class="card-text"><b>Map:</b> Best Parks to visit<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-              <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          <form method="GET" action="/maps/<%= id %>/">
+            <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+          </form>
+          <form method="GET" action="/maps/<%= id %>/edit">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+          </form>
+          <form method="POST" action="/maps/<%= id %>?_method=DELETE">
+            <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+          </form>
         </div>
       </div>
     </div>
