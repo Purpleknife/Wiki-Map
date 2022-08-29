@@ -2,7 +2,21 @@ const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
 const mapQueries = require('../db/queries/maps');
-const pinQueries = require('../db/queries/pins');
+
+const locations = {
+  calgary: {
+    latitude: 51.051984,
+    longitude: -114.069512
+  },
+  vancouver: {
+    latitude: 49.256621,
+    longitude: -123.139937
+  },
+  toronto: {
+    latitude: 43.661784,
+    longitude: -79.500180
+  }
+}
 
 router.get('/profile', (req, res) => {
   const templateVars = {};
@@ -13,15 +27,58 @@ router.get('/profile', (req, res) => {
       mapQueries.getMapByUserId(user.id)
         .then(userMaps => {
           templateVars.userMaps = userMaps;
-          console.log(userMaps);
+          userQueries.getUserFavs(user.id)
+            .then(userFavs => {
+              templateVars.userFavs = userFavs;
+              return res.render('profile', templateVars)
+            });
         });
-      return res.render('profile', templateVars)
     })
-
-
     .catch(e => res.send(e));
-
 });
+
+router.post('/profile', (req, res) => {
+  console.log(req.body);
+
+  let latitude;
+  let longitude;
+
+  if (req.body.city === 'Calgary') {
+    latitude = locations.calgary['latitude'];
+    longitude = locations.calgary['longitude'];
+  }
+  if (req.body.city === 'Vancouver') {
+    latitude = locations.vancouver['latitude'];
+    longitude = locations.vancouver['longitude'];
+  }
+  if (req.body.city === 'Toronto') {
+    latitude = locations.toronto['latitude'];
+    longitude = locations.toronto['longitude'];
+  }
+
+
+  const userId = req.session.user_id;
+  const username = req.session.username
+  mapQueries.addMap({...req.body, user_id: userId, latitude, longitude})
+    .then(map => {
+      console.log(map);
+
+      res.send(map);
+      //res.redirect('/maps');
+    })
+})
+
+// router.post('/properties', (req, res) => {
+//   const userId = req.session.userId;
+//   database.addProperty({...req.body, owner_id: userId})
+//     .then(property => {
+//       res.send(property);
+//     })
+//     .catch(e => {
+//       console.error(e);
+//       res.send(e)
+//     });
+// });
 
 router.get('/:id', (req, res) => {
 
