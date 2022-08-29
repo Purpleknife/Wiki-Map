@@ -25,6 +25,32 @@ exports.getMapById = getMapById;
 
 /**
  *
+ * @param {*} user_id
+ * @returns
+ */
+const getMapByUserId = (user_id) => {
+
+  const queryParams = [user_id];
+  const queryString = `
+  SELECT *
+  FROM maps
+  WHERE user_id = $1;
+  `;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows;
+    })
+    .catch(error => console.log(error.message));
+
+};
+exports.getMapByUserId = getMapByUserId;
+
+
+
+
+/**
+ *
  * @param {*} options can search by title, city, province, and/or user
  * @param {*} limit of db elements to return
  * @returns Promise<{}> array of objects containing maps found

@@ -1,12 +1,23 @@
 
 <nav id="nav-bar">
   <div class="logo"><span>Wiki Map</span></div>
-  <div class="login">
-    <a class="btn btn-outline-dark" href="/login" role="button">Login</a>
-    <a class="btn btn-outline-dark" href="/register" role="button">Register</a>
-  <div id="angle-down-icon">
-    <i class="fa-solid fa-angles-down"></i>
-  </div>
-</div>
+  <% if (!user.id) { %>
+    <div class="login">
+      <a class="btn btn-outline-dark" href="/login/1" role="button">Login</a>
+      <a class="btn btn-outline-dark" href="/register" role="button">Register</a>
+    </div>
+      <% } else { %>
+    <div class="text-right">
+      <form method="POST" action="/logout">
+        <label for="email"><strong>Welcome <%= user.username %>!</strong></label>
+        <button type="submit" class="btn btn-outline-dark">Logout</button>
+      </form>
+      <form method="GET" action="/profile">
+        <a class="btn btn-outline-dark" href="/profile" role="button">Profile</a>
+      </form>
+    </div>
+  <% } %>
+
+
 </nav>
 
