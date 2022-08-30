@@ -49,12 +49,12 @@
   <%- include('partials/_nav') %>
   <main>
     <div class="bg-white shadow rounded overflow-hidden">
-      <div class="px-4 pt-0 pb-4 bg-dark">
-          <div class="media align-items-end profile-header">
-              <div class="profile mr-3"><img src="/images/profile_photo.png" width="130" class="rounded mb-2 img-thumbnail"></div>
-              <div class="media-body mb-5 text-white">
-                  <h4 class="mt-0 mb-0">Alice</h4>
-                  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>Toronto</p>
+      <div class="px-4 pt-0 pb-4" style="background-color: rgba(216,207,200,255);">
+          <div class="media align-items-end profile-header" style="padding-top: 2em;">
+              <div class="profile mr-3"><img src="/images/profile_photo.png" width="150" class="rounded mb-2 img-thumbnail"></div>
+              <div class="media-body mb-5 text-white" style="padding-left: 2em;">
+                  <h4 class="mt-0 mb-0"><%= user.username %></h4>
+                  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><%= user.city %></p>
               </div>
           </div>
       </div>
@@ -78,9 +78,9 @@
       <div class="cardOne">
 
         <ul class="list-group">
-          <li class="list-group-item"><button id="fav-button" type="submit">Favorites</button></li>
-          <li class="list-group-item"><button id="contri-button" type="submit">Contributions</button></li>
-          <li class="list-group-item"><button id="create-button" type="submit">Create New Map</button></li>
+          <li class="list-group-item"><button style="all: unset;" id="fav-button" type="submit">Favorites</button></li>
+          <li class="list-group-item"><button style="all: unset;" id="contri-button" type="submit">Contributions</button></li>
+          <li class="list-group-item"><button style="all: unset;" id="create-button" type="submit">Create New Map</button></li>
         </ul>
 
       </div>

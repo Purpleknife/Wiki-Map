@@ -71,7 +71,12 @@ $(document).ready(() => {
 
 
 
-
+const checkIfOnProfilePage = function() {
+  if (document.URL.includes("profile")) {
+    return true;
+  }
+  return false;
+}
 
 
 

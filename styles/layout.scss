@@ -95,7 +95,7 @@ header {
 
 #nav-bar {
   display: flex;
-  height: 100px;
+  height: 90px;
   width: 100%;
   background-color: $primary-background-color;
   color: black;
@@ -106,13 +106,20 @@ header {
   align-items: center;
 
 
-  .logo {
+  .navbar-brand {
     font-family: $primary-font;
     color: white;
     font-size: 30px;
   }
 
   .functions {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+  }
+
+  .other-functions {
     display: flex;
     flex-direction: row;
     justify-content: right;
