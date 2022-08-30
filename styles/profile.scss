@@ -1,0 +1,76 @@
+@import 'variables';
+
+
+* {
+  box-sizing: border-box;
+}
+
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  /*width: 100%;*/
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {
+  margin: 0 -5px;
+  display: flex;
+  justify-content: center;
+
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: left;
+  width: 1000px;
+  margin-left: 5em;
+  background-color: #f1f1f1;
+}
+
+.cardOne {
+  font-family: $secondary-font;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2); /* this adds the "card" effect */
+  padding: 16px;
+  text-align: left;
+  justify-content: center;
+  width: 28em;
+  height: 100%;
+
+  background: white;
+
+}
+
+table {
+  display: flex;
+  align-items: right;
+  justify-content: right;
+}
+
+
+.list-group-item {
+  all: unset;
+  cursor: pointer;
+}
+
+#fav-card {
+  display: block;
+}
+
+#contri-card {
+  display: block;
+}
+
+#create-card {
+  display: block;
+}

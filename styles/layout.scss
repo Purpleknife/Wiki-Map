@@ -21,12 +21,6 @@ header {
   }
 }
 
-.logo {
-  font-family: $primary-font;
-  color: white;
-  font-size: 30px;
-
-}
 
 .container {
   display: flex;
@@ -112,17 +106,19 @@ header {
   align-items: center;
 
 
-  #angle-down-icon {
-    color: $secondary-color;
-    margin-left: 50%;
-    margin-top: 0.5em;
+  .logo {
+    font-family: $primary-font;
+    color: white;
+    font-size: 30px;
   }
 
-  #angle-down-icon:hover {
-    position: relative;
-    bottom: -10px;
-    cursor: pointer;
+  .functions {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
   }
+
 }
 
 #maps-title {
