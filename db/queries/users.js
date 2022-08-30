@@ -136,7 +136,8 @@ const getUserFavs = (user_id) => {
   const queryParams = [user_id];
   const queryString = `
   SELECT *
-  FROM favorite_maps
+  FROM maps
+  JOIN favorite_maps ON maps.id = map_id
   WHERE user_id = $1
   AND removed_at IS NULL;
   `;
