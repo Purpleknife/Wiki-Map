@@ -76,25 +76,30 @@
       <!-- Favorites -->
       <div class="col-md-4">
         <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
+        <% for (let userFave of userFavs) { %>
         <div class="card mb-4 shadow-sm">
-          <% for (let userFave of userFavs) { %>
+          <script>
+            <%= console.log(userFave) %>
+            let lat = <%= userFave.latitude %>;
+            let lon = <%= userFave.longitude %>;
+          </script>
           <div id= "mapid" style="height: 200px"></div>
           <div class="card-body">
             <p class="card-text"><b>Map:</b> <%= userFave.title %><br><b>City:</b> <%= userFave.city %><br><b>Created By:</b> <%= userFave.username %></p>
-          <div class="button-box">
-            <form method="GET" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-            <form method="GET" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
-            </form>
-            <form method="POST" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
-            </form>
+            <div class="button-box">
+              <form method="GET" action="/maps/<%= userFave.id %>/">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+              </form>
+              <form method="GET" action="/maps">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+              </form>
+              <form method="POST" action="/maps">
+                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
+              </form>
+            </div>
           </div>
-          </div>
-          <% } %>
         </div>
+        <% } %>
       </div>
 
       <!-- Contributions -->
@@ -102,23 +107,28 @@
       <div class="col-md-4">
 
         <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
+        <% for (let userMap of userMaps) { %>
+          <script>
+            <%= console.log(userMap) %>
+            lat = <%= userMap.latitude %>;
+            lon = <%= userMap.longitude %>;
+          </script>
         <div class="card mb-4 shadow-sm">
-          <% for (let userMap of userMaps) { %>
-          <div id="mapid" style="height: 200px"></div>
+          <div id="mapid" style="height: 200px; width: 200px;"></div>
           <div class="card-body">
             <p class="card-text"><b>Map:</b> <%= userMap.title %><br><b>City:</b> <%= userMap.city %><br><b>Created By:</b> <%= userMap.username %></p>
-            <form method="GET" action="/maps/">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            <form method="GET" action="/maps/<%= userMap.id %>/">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <form method="GET" action="/maps/">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             <form method="POST" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </div>
-          <% } %>
         </div>
+        <% } %>
       </div>
     </div>
 
