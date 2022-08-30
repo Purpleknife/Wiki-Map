@@ -11,10 +11,10 @@ const router  = express.Router();
 const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
 
-
+// GET /api/maps/id
 router.get('/:id', (req, res) => { //Setup routes for /maps.
   if (!req.session.user_id) { //If not logged in, redirect to home page.
-    return res.redirect('/');
+    // return res.redirect('/');
   }
 
   mapId = req.params.id;
@@ -24,21 +24,17 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
       pinQueries.getPinsForMapById(mapId)
         .then(pins => {
 
-          const user = {
-            id: req.session['user_id'],
-            username: req.session['username']
-          };
-
-          const templateVars = {
-            user,
+          const response = {
             requestedMap,
             pins
           };
 
-          return res.render('maps', templateVars);
+          return res.json(response);
         })
     })
     .catch(error => console.log(error.message));
 });
+
+// POST /api/maps/id/pins
 
 module.exports = router;
