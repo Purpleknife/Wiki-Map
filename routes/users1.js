@@ -24,13 +24,12 @@ router.get('/profile', (req, res) => { //Setup route for user profile.
   userQueries.getUsersById(req.session.user_id)
     .then(user => {
       templateVars.user = user;
-      mapQueries.getMapByUserId(user.id)
+      userQueries.getUserMaps(user.id, 2)
         .then(userMaps => {
           templateVars.userMaps = userMaps;
-          userQueries.getUserFavs(user.id)
+          userQueries.getUserFavs(user.id, 2)
             .then(userFavs => {
               templateVars.userFavs = userFavs;
-              //console.log(templateVars);
               return res.render('profile', templateVars)
             });
         });
@@ -63,9 +62,6 @@ router.post('/profile', (req, res) => { //Setup route for map creation in user p
   const username = req.session.username
   mapQueries.addMap({...req.body, user_id: userId, latitude, longitude})
     .then(map => {
-
-
-      //res.render('maps', templateVars);
       res.redirect(`/maps/${map.id}`);
     })
     .catch(error => console.log(error.message));

@@ -108,13 +108,15 @@ exports.addUser = addUser;
  * @param {*} user_id to search maps for
  * @returns Promise<[{}]> array of objects found in db
  */
-const getUserMaps = (user_id) => {
+const getUserMaps = (user_id, limit) => {
 
   const queryParams = [user_id];
   const queryString = `
-  SELECT *
+  SELECT maps.*, users.username
   FROM maps
-  WHERE user_id = $1;
+  JOIN users ON user_id = users.id
+  WHERE user_id = $1
+  LIMIT ${limit || 20};
   `;
 
   return db.query(queryString, queryParams)
@@ -131,15 +133,17 @@ exports.getUserMaps = getUserMaps;
  * @param {*} user_id to search favorite_maps for
  * @returns Promise<[{}]> array of objects with all users favorited maps
  */
-const getUserFavs = (user_id) => {
+const getUserFavs = (user_id, limit) => {
 
   const queryParams = [user_id];
   const queryString = `
-  SELECT *
+  SELECT maps.*, users.username
   FROM maps
   JOIN favorite_maps ON maps.id = map_id
-  WHERE user_id = $1
-  AND removed_at IS NULL;
+  JOIN users ON maps.user_id = users.id
+  WHERE maps.user_id = $1
+  AND removed_at IS NULL
+  LIMIT ${limit || 20};
   `;
 
   return db.query(queryString, queryParams)
