@@ -49,9 +49,9 @@
     <div class="bg-white shadow rounded overflow-hidden">
       <div class="px-4 pt-0 pb-4 bg-dark">
           <div class="media align-items-end profile-header">
-              <div class="profile mr-3"><img src="/images/profile_photo.png" width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+              <div class="profile mr-3"><img src="/images/profile_photo.png" width="130" class="rounded mb-2 img-thumbnail"></div>
               <div class="media-body mb-5 text-white">
-                  <h4 class="mt-0 mb-0">John Doe</h4>
+                  <h4 class="mt-0 mb-0">Alice</h4>
                   <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>Toronto</p>
               </div>
           </div>
@@ -77,54 +77,46 @@
       <div class="col-md-4">
         <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
         <div class="card mb-4 shadow-sm">
-          <div id="mapid1"></div>
+          <% for (let userFave of userFavs) { %>
+          <div id= "mapid" style="height: 200px"></div>
           <div class="card-body">
-            <p class="card-text"><b>Map:</b> Best Places to eat around Town<br><b>City:</b> London<br><b>Created By:</b> Username</p>
+            <p class="card-text"><b>Map:</b> <% userFave.title %><br><b>City:</b> <% userFave.city %><br><b>Created By:</b> <% userFave.username %></p>
+          <div class="button-box">
             <form method="GET" action="/maps">
               <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <form method="GET" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             <form method="POST" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </div>
-        </div>
-        <div class="card mb-4 shadow-sm">
-          <div id="mapid2"></div>
-          <div class="card-body">
-            <p class="card-text"><b>Map:</b> Best Places to eat around Town<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-            <form method="GET" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-            </form>
-            <form method="GET" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
-            </form>
-            <form method="POST" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
-            </form>
           </div>
+          <% } %>
         </div>
       </div>
 
       <!-- Contributions -->
       <div class="col-md-4">
+
         <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
         <div class="card mb-4 shadow-sm">
-          <div id="mapid3"></div>
+          <% for (let userMap of userMaps) { %>
+          <div id="mapid" style="height: 200px"></div>
           <div class="card-body">
-            <p class="card-text"><b>Map:</b> Best Mountains to Hike<br><b>City:</b> London<br><b>Created By:</b> Username</p>
+            <p class="card-text"><b>Map:</b> <% userMap.title %><br><b>City:</b> <% userMap.city %><br><b>Created By:</b> <% userMap.username %></p>
             <form method="GET" action="/maps/">
               <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
             <form method="GET" action="/maps/">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
             </form>
             <form method="POST" action="/maps">
-              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+              <button type="button" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </div>
+          <% } %>
         </div>
       </div>
     </div>
