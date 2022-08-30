@@ -49,7 +49,7 @@
     <div class="bg-white shadow rounded overflow-hidden">
       <div class="px-4 pt-0 pb-4 bg-dark">
           <div class="media align-items-end profile-header">
-              <div class="profile mr-3"><img src="/images/profile_photo.png" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
+              <div class="profile mr-3"><img src="/images/profile_photo.png" width="130" class="rounded mb-2 img-thumbnail"><a href="#" class="btn btn-dark btn-sm btn-block">Edit profile</a></div>
               <div class="media-body mb-5 text-white">
                   <h4 class="mt-0 mb-0">John Doe</h4>
                   <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>Toronto</p>
@@ -69,61 +69,59 @@
       </div>
   </main>
 
+  <!-- Maps Container -->
   <div class="maps">
 
     <div class="row">
+      <!-- Favorites -->
       <div class="col-md-4">
-        <p id="maps-title">Favorite maps <i class="fa-solid fa-sort-down"></i></p>
+        <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
         <div class="card mb-4 shadow-sm">
           <div id="mapid1"></div>
           <div class="card-body">
             <p class="card-text"><b>Map:</b> Best Places to eat around Town<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-            <form method="GET" action="/maps/">
+            <form method="GET" action="/maps">
               <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            <form method="GET" action="/maps/">
+            <form method="GET" action="/maps">
               <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
             </form>
-            <form method="POST" action="/maps/>
+            <form method="POST" action="/maps">
               <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
-
-
-            <div class="col-md-4">
-              <div class="card mb-4 shadow-sm">
-                <div id="mapid2"></div>
-                <div class="card-body">
-                  <p class="card-text"><b>Map:</b> Best Mountains to Hike<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-                  <form method="GET" action="/maps">
-                    <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-                  </form>
-                  <form method="GET" action="/maps">
-                    <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
-                  </form>
-                  <form method="POST" action="/maps/>
-                    <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
-                  </form>
-                </div>
-              </div>
-            </div>
+          </div>
+        </div>
+        <div class="card mb-4 shadow-sm">
+          <div id="mapid2"></div>
+          <div class="card-body">
+            <p class="card-text"><b>Map:</b> Best Places to eat around Town<br><b>City:</b> London<br><b>Created By:</b> Username</p>
+            <form method="GET" action="/maps">
+              <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form>
+            <form method="GET" action="/maps">
+              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
+            </form>
+            <form method="POST" action="/maps">
+              <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
+            </form>
           </div>
         </div>
       </div>
 
-
+      <!-- Contributions -->
       <div class="col-md-4">
         <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
         <div class="card mb-4 shadow-sm">
           <div id="mapid3"></div>
           <div class="card-body">
-            <p class="card-text"><b>Map:</b> Best Parks to visit<br><b>City:</b> London<br><b>Created By:</b> Username</p>
-            <form method="GET" action="/maps">
+            <p class="card-text"><b>Map:</b> Best Mountains to Hike<br><b>City:</b> London<br><b>Created By:</b> Username</p>
+            <form method="GET" action="/maps/">
               <button type="button" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form>
-            <form method="GET" action="/maps">
+            <form method="GET" action="/maps/">
               <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Edit <i class="fa-solid fa-pen-to-square"></i></button>
             </form>
-            <form method="POST" action="/maps>
+            <form method="POST" action="/maps">
               <button type="button" class="btn btn-sm btn-outline-secondary" disabled>Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </div>
@@ -134,7 +132,7 @@
 
   <div class="container">
     <h2>Create new Map</h2><hr>
-    <form class="form" method="POST" action="/maps">
+    <form class="form" method="POST" action="/profile">
       <div class="form-group mb-2">
         <label for="title">Title:</label>
         <input class="form-control" type="text" name="title" placeholder="Enter map title...">
