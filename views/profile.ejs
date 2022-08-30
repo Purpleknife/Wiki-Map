@@ -2,7 +2,7 @@
 <html lang="en">
 
 <head>
-  <title>Login</title>
+  <title>Profile</title>
 
   <meta charset="UTF-8" >
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
@@ -108,12 +108,12 @@
 
         <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
         <% for (let userMap of userMaps) { %>
+        <div class="card mb-4 shadow-sm">
           <script>
             <%= console.log(userMap) %>
             lat = <%= userMap.latitude %>;
             lon = <%= userMap.longitude %>;
           </script>
-        <div class="card mb-4 shadow-sm">
           <div id="mapid" style="height: 200px; width: 200px;"></div>
           <div class="card-body">
             <p class="card-text"><b>Map:</b> <%= userMap.title %><br><b>City:</b> <%= userMap.city %><br><b>Created By:</b> <%= userMap.username %></p>
