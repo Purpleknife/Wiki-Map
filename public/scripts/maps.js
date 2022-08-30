@@ -1,15 +1,32 @@
-(function($) {
+
   $(() => {
 
-    const map = L.map('mapid').setView([51.505, -0.09], 13);
 
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        maxZoom: 19,
-        attribution: '© OpenStreetMap'
-    }).addTo(map);
+      const map = L.map('mapid').setView([lat, lon], 13);
 
-    const marker = L.marker([51.5, -0.09]).addTo(map);
-    marker.bindPopup('London').openPopup();
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© OpenStreetMap'
+      }).addTo(map);
+
+      const marker = L.marker([lat, lon]).addTo(map);
+      //marker.bindPopup(`${obj.title}`).openPopup();
+
+
+    // $.ajax('/maps', {
+    //   method: 'GET',
+    //   data: $(this).serialize(),
+    // })
+    //   .done(function() {
+    //     generateMaps();
+
+    //   })
+    //   .fail(function() {
+    //     console.log('Submission failed.');
+    //   });
+
+
+
 
     const getAllPinsFromDb = function(obj) {
       const marker = L.marker([obj.latitude, obj.longitude]).addTo(map)
@@ -29,4 +46,6 @@
     // })
 
   });
-})(jQuery);
+
+
+module.exports = generateMaps;

@@ -16,7 +16,7 @@ const getMapById = (map_id) => {
 
   return db.query(queryString, queryParams)
     .then(data => {
-      return data.rows;
+      return data.rows[0];
     })
     .catch(error => console.log(error.message));
 

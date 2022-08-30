@@ -61,24 +61,14 @@ router.post('/profile', (req, res) => {
   const username = req.session.username
   mapQueries.addMap({...req.body, user_id: userId, latitude, longitude})
     .then(map => {
-      console.log(map);
 
-      res.send(map);
-      //res.redirect('/maps');
+
+      //res.render('maps', templateVars);
+      res.redirect(`/maps/${map.id}`);
     })
-})
+    .catch(error => console.log(error.message));
+});
 
-// router.post('/properties', (req, res) => {
-//   const userId = req.session.userId;
-//   database.addProperty({...req.body, owner_id: userId})
-//     .then(property => {
-//       res.send(property);
-//     })
-//     .catch(e => {
-//       console.error(e);
-//       res.send(e)
-//     });
-// });
 
 router.get('/:id', (req, res) => {
 
