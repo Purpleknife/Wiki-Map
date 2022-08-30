@@ -18,7 +18,7 @@ const locations = {
   }
 }
 
-router.get('/profile', (req, res) => {
+router.get('/profile', (req, res) => { //Setup route for user profile.
   const templateVars = {};
 
   userQueries.getUsersById(req.session.user_id)
@@ -37,7 +37,8 @@ router.get('/profile', (req, res) => {
     .catch(e => res.send(e));
 });
 
-router.post('/profile', (req, res) => {
+
+router.post('/profile', (req, res) => { //Setup route for map creation in user profile.
   console.log(req.body);
 
   let latitude;
@@ -70,7 +71,7 @@ router.post('/profile', (req, res) => {
 });
 
 
-router.get('/:id', (req, res) => {
+router.get('/:id', (req, res) => { //Setup route for login without a form page.
 
   userQueries.getUsersById(req.params.id)
     .then(user => {
@@ -85,7 +86,7 @@ router.get('/:id', (req, res) => {
 });
 
 
-router.post('/', (req, res) => {
+router.post('/', (req, res) => { //Setup route for /logout.
   req.session = null;
   return res.redirect('/');
 });

@@ -1,30 +1,16 @@
 
   $(() => {
 
+    //Setup the map that's gonna show up in maps, depending on the id of the map requested:
+    const map = L.map('mapid').setView([lat, lon], 13);
 
-      const map = L.map('mapid').setView([lat, lon], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
 
-      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-          maxZoom: 19,
-          attribution: '© OpenStreetMap'
-      }).addTo(map);
-
-      const marker = L.marker([lat, lon]).addTo(map);
-      //marker.bindPopup(`${obj.title}`).openPopup();
-
-
-    // $.ajax('/maps', {
-    //   method: 'GET',
-    //   data: $(this).serialize(),
-    // })
-    //   .done(function() {
-    //     generateMaps();
-
-    //   })
-    //   .fail(function() {
-    //     console.log('Submission failed.');
-    //   });
-
+    const marker = L.marker([lat, lon]).addTo(map);
+    //marker.bindPopup(`${obj.title}`).openPopup();
 
 
 
@@ -48,4 +34,3 @@
   });
 
 
-module.exports = generateMaps;
