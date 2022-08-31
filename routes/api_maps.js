@@ -13,9 +13,6 @@ const pinQueries = require('../db/queries/pins');
 
 // GET /api/maps/id
 router.get('/:id', (req, res) => { //Setup routes for /maps.
-  if (!req.session.user_id) { //If not logged in, redirect to home page.
-    // return res.redirect('/');
-  }
 
   mapId = req.params.id;
   mapQueries.getMapById(mapId)
@@ -38,6 +35,10 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 // POST /api/maps/id/pins
 router.post('/:id/pins', (req, res) => {
 
+  // if (!req.session.user_id) { //If not logged in, redirect to home page.
+  //   console.error('You must be logged in to contribute to maps.');
+  // }
+
   const map_id = req.params.id;
   const { title, description, image, latitude, longitude } = req.body;
   const pin = {
@@ -47,7 +48,7 @@ router.post('/:id/pins', (req, res) => {
     image,
     latitude,
     longitude
-  }
+  };
 
   pinQueries.addPin(pin)
     .then(data => {
