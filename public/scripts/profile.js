@@ -1,7 +1,7 @@
 
 $(document).ready(() => {
-  const createMap = function(latitude, longitude, userID) {
-    const map = L.map(`map${userID}`).setView([latitude, longitude], 13);
+  const createMap = function(latitude, longitude, mapID) {
+    const map = L.map(`map${mapID}`).setView([latitude, longitude], 13);
     console.log('abc');
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
@@ -30,15 +30,15 @@ $(document).ready(() => {
   const $contriButton = $('#contri-button');
   const $createButton = $('#create-button');
 
-  $favDiv.hide();
-  $contriDiv.hide();
+  $favDiv.css('display', 'none');
+  $contriDiv.css('display', 'none');
   //$createDiv.hide();
 
   $favButton.on('click', function() {
 
     $('#fav-card').css('display', 'block');
-    $contriDiv.hide();
-    $createDiv.hide();
+    $contriDiv.css('display', 'none');
+    $createDiv.css('display', 'none');
     const favLat = document.querySelector('.fav-lat').value;
     const favLon = document.querySelector('.fav-lon').value;
     const favID = document.querySelector('.fav-id').value;
@@ -49,8 +49,8 @@ $(document).ready(() => {
 
   $contriButton.on('click', function() {
     $('#contri-card').css('display', 'block');
-    $favDiv.hide();
-    $createDiv.hide();
+    $favDiv.css('display', 'none');
+    $createDiv.css('display', 'none');
     const contriLat = document.querySelector('.contri-lat').value;
     const contriLon = document.querySelector('.contri-lon').value;
     const contriID = document.querySelector('.contri-id').value;
@@ -62,8 +62,8 @@ $(document).ready(() => {
 
   $createButton.on('click', function() {
     $('#create-card').css('display', 'block');
-    $favDiv.hide();
-    $contriDiv.hide();
+    $favDiv.css('display', 'none');
+    $contriDiv.css('display', 'none');
 
   });
 

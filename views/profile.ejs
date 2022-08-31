@@ -91,24 +91,23 @@
       <div class="card">
 
         <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
-      <% for (let userFave of userFavs) { %>
+      <% for (let favMapIndex in userFavs) { %>
         <div class="card-body">
-          <!-- <script>
-            <%= console.log(userFave) %>
-            let lat = <%= userFave.latitude %>;
-            let lon = <%= userFave.longitude %>;
-          </script> -->
-        <div id="map<%= userFave.id %>" style="height: 200px"></div>
-        <input class="fav-id" type="hidden" value="<%= userFave.id %>">
-        <input class="fav-lat" type="hidden" value="<%= userFave.latitude %>">
-        <input class="fav-lon" type="hidden" value="<%= userFave.longitude %>">
-        <p class="card-text"><b>Map:</b> <%= userFave.title %><br><b>City:</b> <%= userFave.city %><br><b>Created By:</b> <%= userFave.username %></p>
+
+        <div id="map<%= favMapIndex %>" style="height: 200px"></div>
+        <input class="fav-id" type="hidden" value="<%= favMapIndex %>">
+        <input class="fav-lat" type="hidden" value="<%= userFavs[favMapIndex].latitude %>">
+        <input class="fav-lon" type="hidden" value="<%= userFavs[favMapIndex].longitude %>">
+        <p class="card-text"><b>Map:</b> <%= userFavs[favMapIndex].title %><br><b>City:</b> <%= userFavs[favMapIndex].city %><br><b>Created By:</b> <%= userFavs[favMapIndex].username %></p>
         <table>
-            <form method="GET" action="/maps/<%= userFave.id %>/">
+            <form method="GET" action="/maps/<%= userFavs[favMapIndex].id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form> &nbsp
             <form method="GET" action="/maps">
-              <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></i></button>
+            </form> &nbsp
+            <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
             </form> &nbsp
             <form method="POST" action="/maps">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
@@ -124,23 +123,22 @@
       <div class="card">
 
         <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
-          <% for (let userMap of userMaps) { %>
+          <% for (let mapIndex in userMaps) { %>
         <div class="card-body">
-          <!-- <script>
-            <%= console.log(userMap) %>
-            lat = <%= userMap.latitude %>;
-            lon = <%= userMap.longitude %>;
-          </script> -->
-          <div id= "map<%= userMap.id %>" style="height: 200px"></div>
-          <input class="contri-id" type="hidden" value="<%= userMap.id %>">
-          <input class="contri-lat" type="hidden" value="<%= userMap.latitude %>">
-          <input class="contri-lon" type="hidden" value="<%= userMap.longitude %>">
-            <p class="card-text"><b>Map:</b> <%= userMap.title %><br><b>City:</b> <%= userMap.city %><br><b>Created By:</b> <%= userMap.username %></p>
+
+          <div id= "map<%= mapIndex %>" style="height: 200px"></div>
+          <input class="contri-id" type="hidden" value="<%= mapIndex %>">
+          <input class="contri-lat" type="hidden" value="<%= userMaps[mapIndex].latitude %>">
+          <input class="contri-lon" type="hidden" value="<%= userMaps[mapIndex].longitude %>">
+            <p class="card-text"><b>Map:</b> <%= userMaps[mapIndex].title %><br><b>City:</b> <%= userMaps[mapIndex].city %><br><b>Created By:</b> <%= userMaps[mapIndex].username %></p>
           <table>
-            <form method="GET" action="/maps/<%= userMap.id %>/">
+            <form method="GET" action="/maps/<%= userMaps[mapIndex].id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form> &nbsp
             <form method="GET" action="/maps">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></i></button>
+            </form> &nbsp
+            <form method="POST" action="/maps/<%= userMaps[mapIndex].id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
             </form> &nbsp
             <form method="POST" action="/maps">
@@ -166,22 +164,13 @@
 
           <div class="form-group mb-2">
             <label for="province">Province:</label><br/>
-            <select style="width: 20em; height: 2.5em;" name="province" id="province">
-              <option value="volvo">Choose a province</option>
-              <option value="volvo">Alberta</option>
-              <option value="saab">Ontario</option>
-              <option value="opel">British Columbia</option>
-            </select>
-            <!-- <input class="form-control" type="text" name="province" placeholder="Enter province..."> -->
+            <input style="width: 20em; height: 2.5em;" class="form-control" type="text" name="province" placeholder="Enter province...">
+
           </div>
+
           <div class="form-group mb-2">
             <label for="city">City:</label><br/>
-            <select style="width: 20em; height: 2.5em;"  name="city" id="city">
-              <option value="volvo">Choose a city</option>
-              <option value="volvo">Calgary</option>
-              <option value="saab">Toronto</option>
-              <option value="opel">Vancouver</option>
-            </select>
+            <input style="width: 20em; height: 2.5em;" class="form-control" type="text" name="city" placeholder="Enter city...">
           </div>
 
           <button type="submit" class="btn btn-info">Create Map</button>

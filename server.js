@@ -65,6 +65,8 @@ app.get('/', (req, res) => {
   console.log(templateVars);
   res.render('index', templateVars);
 });
+const favRoutes = require('./routes/favorite');
+app.use('/maps', favRoutes);
 
 
 app.listen(PORT, () => {
