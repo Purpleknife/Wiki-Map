@@ -5,7 +5,7 @@ $(document).ready(() => {
 
   const createMap = function(latitude, longitude, mapID) {
     const map = L.map(`mapFav${mapID}`).setView([latitude, longitude], 13);
-    console.log('abc');
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
           attribution: '© OpenStreetMap'
@@ -16,7 +16,7 @@ $(document).ready(() => {
 
   const createMapContri = function(latitude, longitude, mapID) {
     const map = L.map(`mapContri${mapID}`).setView([latitude, longitude], 13);
-    console.log('abc');
+
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
           attribution: '© OpenStreetMap'
