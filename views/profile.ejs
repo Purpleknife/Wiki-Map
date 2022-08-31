@@ -109,7 +109,7 @@
             <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
             </form> &nbsp
-            <form method="POST" action="/maps">
+            <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>?_method=DELETE">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </table>

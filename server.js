@@ -10,7 +10,7 @@ const cookieSession = require('cookie-session');
 const PORT = process.env.PORT || 8080;
 const app = express();
 
-
+const methodOverride = require('method-override');
 app.set('view engine', 'ejs');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
@@ -32,6 +32,7 @@ app.use(
 );
 app.use(express.static('public'));
 
+app.use(methodOverride('_method'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require('./routes/users');
@@ -67,6 +68,7 @@ app.get('/', (req, res) => {
 });
 const favRoutes = require('./routes/favorite');
 app.use('/maps', favRoutes);
+//app.use('/maps/delete', favRoutes);
 
 
 app.listen(PORT, () => {
