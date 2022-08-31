@@ -1,26 +1,31 @@
 
 $(document).ready(() => {
+
+  //To generate the maps from Leaflet:
+
   const createMap = function(latitude, longitude, mapID) {
-    const map = L.map(`map${mapID}`).setView([latitude, longitude], 13);
+    const map = L.map(`mapFav${mapID}`).setView([latitude, longitude], 13);
     console.log('abc');
       L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
           maxZoom: 19,
           attribution: '© OpenStreetMap'
       }).addTo(map);
 
-      const marker = L.marker([latitude, longitude]).addTo(map);
+      const favMarker = L.marker([latitude, longitude]).addTo(map);
   }
 
-  // const createMapContri = function(latitude, longitude, userID) {
-  //   const map = L.map(`map${userID}`).setView([latitude, longitude], 13);
-  //   console.log('abc');
-  //     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  //         maxZoom: 19,
-  //         attribution: '© OpenStreetMap'
-  //     }).addTo(map);
+  const createMapContri = function(latitude, longitude, mapID) {
+    const map = L.map(`mapContri${mapID}`).setView([latitude, longitude], 13);
+    console.log('abc');
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+          maxZoom: 19,
+          attribution: '© OpenStreetMap'
+      }).addTo(map);
 
-  //     const marker = L.marker([latitude, longitude]).addTo(map);
-  // }
+      const contriMarker = L.marker([latitude, longitude]).addTo(map);
+  }
+
+  //To make Favorites, Contributions and Create new Map, show up when the buttons are clicked:
 
   const $favDiv = $('#fav-card');
   const $contriDiv = $('#contri-card');
@@ -39,7 +44,7 @@ $(document).ready(() => {
     $('#fav-card').css('display', 'block');
     $contriDiv.css('display', 'none');
     $createDiv.css('display', 'none');
-    const favLat = document.querySelector('.fav-lat').value;
+    const favLat = document.querySelector('.fav-lat').value; //Fetch the hidden values sent from profile.ejs
     const favLon = document.querySelector('.fav-lon').value;
     const favID = document.querySelector('.fav-id').value;
     // console.log(favLat);
@@ -54,10 +59,10 @@ $(document).ready(() => {
     const contriLat = document.querySelector('.contri-lat').value;
     const contriLon = document.querySelector('.contri-lon').value;
     const contriID = document.querySelector('.contri-id').value;
-    console.log(contriLat);
-    console.log(contriLon);
-    console.log(contriID);
-    createMap(contriLat, contriLon, contriID);
+    // console.log(contriLat);
+    // console.log(contriLon);
+    // console.log(contriID);
+    createMapContri(contriLat, contriLon, contriID);
   });
 
   $createButton.on('click', function() {
@@ -70,7 +75,7 @@ $(document).ready(() => {
 });
 
 
-
+//To check if the user is in the profile page:
 const checkIfOnProfilePage = function() {
   if (document.URL.includes("profile")) {
     return true;

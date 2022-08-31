@@ -91,25 +91,25 @@
       <div class="card">
 
         <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
-      <% for (let favMapIndex in userFavs) { %>
+      <% for (let userFave of userFavs) { %>
         <div class="card-body">
 
-        <div id="map<%= favMapIndex %>" style="height: 200px"></div>
-        <input class="fav-id" type="hidden" value="<%= favMapIndex %>">
-        <input class="fav-lat" type="hidden" value="<%= userFavs[favMapIndex].latitude %>">
-        <input class="fav-lon" type="hidden" value="<%= userFavs[favMapIndex].longitude %>">
-        <p class="card-text"><b>Map:</b> <%= userFavs[favMapIndex].title %><br><b>City:</b> <%= userFavs[favMapIndex].city %><br><b>Created By:</b> <%= userFavs[favMapIndex].username %></p>
+        <div id="mapFav<%= userFave.id %>" style="height: 200px"></div>
+        <input class="fav-id" type="hidden" value="<%= userFave.id %>">
+        <input class="fav-lat" type="hidden" value="<%= userFave.latitude %>">
+        <input class="fav-lon" type="hidden" value="<%= userFave.longitude %>">
+        <p class="card-text"><b>Map:</b> <%= userFave.title %><br><b>City:</b> <%= userFave.city %><br><b>Created By:</b> <%= userFave.username %></p>
         <table>
-            <form method="GET" action="/maps/<%= userFavs[favMapIndex].id %>/">
+            <form method="GET" action="/maps/<%= userFave.id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
             </form> &nbsp
             <form method="GET" action="/maps">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></i></button>
             </form> &nbsp
-            <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>">
+            <form method="POST" action="/maps/<%= userFave.id %>">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
             </form> &nbsp
-            <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>?_method=DELETE">
+            <form method="POST" action="/maps/<%= userFave.id %>?_method=DELETE">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </table>
@@ -126,7 +126,7 @@
           <% for (let mapIndex in userMaps) { %>
         <div class="card-body">
 
-          <div id= "map<%= mapIndex %>" style="height: 200px"></div>
+          <div id= "mapContri<%= mapIndex %>" style="height: 200px"></div>
           <input class="contri-id" type="hidden" value="<%= mapIndex %>">
           <input class="contri-lat" type="hidden" value="<%= userMaps[mapIndex].latitude %>">
           <input class="contri-lon" type="hidden" value="<%= userMaps[mapIndex].longitude %>">
