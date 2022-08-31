@@ -41,15 +41,25 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 // PUT /api/maps/id/update
 router.put('/:id/update', (req, res) => {
 
-  console.log('In router.put');
+  const pinId = req.params.id;
+  const title = req.body.title;
+  const description = req.body.description;
+  const image = req.body.image;
+  const options = { title, description, image };
 
-})
+  pinQueries.updatePins(pinId, options);
+
+});
 
 // DELETE /api/maps/id/delete
 router.delete('/:id/delete', (req, res) => {
 
   pinId = req.params.id;
-  console.log('In router.delete', pinId);
+  pinQueries.deletePin(pinId)
+    .then(data => {
+      res.redirect(`/maps/${data.map_id}`);
+    })
+    .catch(error => console.log(error.message));
 
 });
 

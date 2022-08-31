@@ -25,7 +25,7 @@ exports.getPinsForMapById = getPinsForMapById;
 /**
  *
  * @param {*} pin_id of pin to update
- * @param {*} options [title, description, image]
+ * @param {*} options {title, description, image}
  * @returns Promise<{}> object of pin updated
  */
 const updatePins = (pin_id, options) => {
@@ -59,6 +59,7 @@ const updatePins = (pin_id, options) => {
   queryString += `
   WHERE pins.id = $${queryParams.length}
   RETURNING *;`;
+  console.log(queryString, queryParams);
 
   return db.query(queryString, queryParams)
     .then(data => {
@@ -93,3 +94,26 @@ const addPin = (pin) => {
 
 }
 exports.addPin = addPin;
+
+/**
+ *
+ * @param {} pin_id pin_id to remove
+ * @returns Promise<{}> object of pin removed
+ */
+ const deletePin = (pin_id) => {
+
+  const queryParams = [pin_id];
+  const queryString = `
+  DELETE FROM pins
+  WHERE id = $1
+  RETURNING *;
+  `;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(error => console.log(error.message));
+
+}
+exports.deletePin = deletePin;

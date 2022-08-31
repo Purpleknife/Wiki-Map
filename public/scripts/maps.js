@@ -25,7 +25,7 @@ $(() => {
       Description: ${pin.description}<br>
       Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /><br>
       <button id='pin${pin.id}' class="btn btn-sm">Edit</button>
-      <form method="DELETE" action='/api/maps/${pin.id}/delete'>
+      <form method="POST" action='/api/maps/${pin.id}/delete?_method=DELETE'>
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
       </form>
       `);
@@ -43,10 +43,10 @@ $(() => {
     console.log('Marker', marker);
     console.log('Saved pin', pin);
     marker.bindPopup(`
-    <form method='PUT' action='/api/maps/${pin.id}/update'>
-      Title: <input type='text' name='pinTitle' value='${pin.title}'><br>
-      Description: <input type='text' name='pinDescription' value='${pin.description}'><br>
-      Image URL: <input type='text' name='pinUrl'  value='${pin.image}'><br>
+    <form method='POST' action='/api/maps/${pin.id}/update?_method=PUT'>
+      Title: <input type='text' name='title' value='${pin.title}'><br>
+      Description: <input type='text' name='description' value='${pin.description}'><br>
+      Image URL: <input type='text' name='image' value='${pin.image}'><br>
       <button class="btn btn-sm">Accept</button>
     </form>`
     );
