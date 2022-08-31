@@ -22,12 +22,12 @@ $(() => {
 
       let formText = `
       <br/>
-      <table>
+      <div class="btn-group">
       <button id='pin${pin.id}' class="btn btn-sm">Edit</button> &nbsp; &nbsp;
       <form method="POST" action='/api/maps/${pin.id}/delete?_method=DELETE'>
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
       </form>
-      </table>`;
+      </div>`;
 
       if (!user_id) {
         formText = `<strong><i style="color: #ff0000">Please login or register to edit pins.</i></strong>`;
