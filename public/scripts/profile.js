@@ -56,18 +56,22 @@ $(() => {
 
     const htmlText = `
     <div id="${type + map.id}" style="height: 200px"></div>
+    <br/>
     <p class="card-text"><b>Map:</b> ${map.title}<br><b>City:</b> ${map.city}<br><b>Created By:</b> ${map.username}</p>
     <div>
+
       <form method="GET" action="/maps/${map.id}/">
         <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-      </form>
+      </form> &nbsp;
       <form method="POST" action="/maps/${map.id}">
-        <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
-      </form> &nbsp
+        <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+      </form> &nbsp;
       <form method="POST" action="/maps/${map.id}?_method=DELETE">
         <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
       </form>
-    </div>`;
+
+    </div>
+    <br/>`;
 
     return htmlText;
   }
