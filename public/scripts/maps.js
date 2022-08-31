@@ -37,11 +37,8 @@ $(() => {
     });
   };
 
-
   const editPin = (marker, pin) => {
 
-    console.log('Marker', marker);
-    console.log('Saved pin', pin);
     marker.bindPopup(`
     <form method='POST' action='/api/maps/${pin.id}/update?_method=PUT'>
       Title: <input type='text' name='title' value='${pin.title}'><br>
@@ -58,9 +55,12 @@ $(() => {
     popup
       .setLatLng(e.latlng)
       .setContent(`
-      Add pin here?</br>
-      <form onsubmit='createPin()'>
-        <button type='submit'>Create</button>
+      Create Pin:</br>
+      <form method='POST' action='/api/maps/${map_id}/pins'>
+        Title: <input type='text' name='title'><br>
+        Description: <input type='text' name='description'><br>
+        Image URL: <input type='text' name='image'><br>
+        <button class="btn btn-sm">Accept</button>
       </form>
       `)
     .openOn(map);

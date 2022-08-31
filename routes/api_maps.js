@@ -36,7 +36,17 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 });
 
 // POST /api/maps/id/pins
+router.post('/:id/pins', (req, res) => {
 
+  console.log(req.body);
+
+
+  // pinQueries.addPin()
+  //   .then(data => {
+  //     res.redirect(`/maps/${data.map_id}`);
+  //   })
+  //   .catch(error => console.log(error.message));
+});
 
 // PUT /api/maps/id/update
 router.put('/:id/update', (req, res) => {
@@ -47,7 +57,11 @@ router.put('/:id/update', (req, res) => {
   const image = req.body.image;
   const options = { title, description, image };
 
-  pinQueries.updatePins(pinId, options);
+  pinQueries.updatePins(pinId, options)
+  .then(data => {
+    res.redirect(`/maps/${data.map_id}`);
+  })
+  .catch(error => console.log(error.message));
 
 });
 
@@ -59,7 +73,7 @@ router.delete('/:id/delete', (req, res) => {
     .then(data => {
       res.redirect(`/maps/${data.map_id}`);
     })
-    .catch(error => console.log(error.message));
+    .catch(error => console.log(error.message))
 
 });
 
