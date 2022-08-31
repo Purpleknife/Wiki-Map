@@ -21,12 +21,6 @@ header {
   }
 }
 
-.logo {
-  font-family: $primary-font;
-  color: white;
-  font-size: 30px;
-
-}
 
 .container {
   display: flex;
@@ -101,7 +95,7 @@ header {
 
 #nav-bar {
   display: flex;
-  height: 100px;
+  height: 90px;
   width: 100%;
   background-color: $primary-background-color;
   color: black;
@@ -112,17 +106,26 @@ header {
   align-items: center;
 
 
-  #angle-down-icon {
-    color: $secondary-color;
-    margin-left: 50%;
-    margin-top: 0.5em;
+  .navbar-brand {
+    font-family: $primary-font;
+    color: white;
+    font-size: 30px;
   }
 
-  #angle-down-icon:hover {
-    position: relative;
-    bottom: -10px;
-    cursor: pointer;
+  .functions {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
   }
+
+  .other-functions {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    align-items: center;
+  }
+
 }
 
 #maps-title {

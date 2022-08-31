@@ -29,6 +29,7 @@ router.get('/profile', (req, res) => { //Setup route for user profile.
           templateVars.userMaps = userMaps;
           userQueries.getUserFavs(user.id, 2)
             .then(userFavs => {
+              console.log('userFavs', userFavs);
               templateVars.userFavs = userFavs;
               return res.render('profile', templateVars)
             });

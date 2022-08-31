@@ -13,12 +13,14 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
+  <link rel="stylesheet" href="/styles/profile.css" />
 
   <!-- Javascript -->
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
   <script defer src="/scripts/index.js"></script>
   <script defer src="/scripts/maps.js"></script>
+  <script defer src="/scripts/profile.js"></script>
 
   <!-- Bootstrap -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
@@ -47,12 +49,12 @@
   <%- include('partials/_nav') %>
   <main>
     <div class="bg-white shadow rounded overflow-hidden">
-      <div class="px-4 pt-0 pb-4 bg-dark">
-          <div class="media align-items-end profile-header">
-              <div class="profile mr-3"><img src="/images/profile_photo.png" width="130" class="rounded mb-2 img-thumbnail"></div>
-              <div class="media-body mb-5 text-white">
-                  <h4 class="mt-0 mb-0">Alice</h4>
-                  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i>Toronto</p>
+      <div class="px-4 pt-0 pb-4" style="background-color: rgba(216,207,200,255);">
+          <div class="media align-items-end profile-header" style="padding-top: 2em;">
+              <div class="profile mr-3"><img src="/images/profile_photo.png" width="150" class="rounded mb-2 img-thumbnail"></div>
+              <div class="media-body mb-5 text-white" style="padding-left: 2em;">
+                  <h4 class="mt-0 mb-0"><%= user.username %></h4>
+                  <p class="small mb-4"> <i class="fa fa-map-marker mr-2"></i><%= user.city %></p>
               </div>
           </div>
       </div>
@@ -60,100 +62,141 @@
       <div class="bg-light p-4 d-flex justify-content-end text-center">
           <ul class="list-inline mb-0">
               <li class="list-inline-item">
-                  <h5 class="font-weight-bold mb-0 d-block">3</h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Favorites</small>
+                  <h5 class="font-weight-bold mb-0 d-block"><%= userFavs.length %></h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Favorites</small>
               </li>
               <li class="list-inline-item">
-                  <h5 class="font-weight-bold mb-0 d-block">4</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Contributions</small>
+                  <h5 class="font-weight-bold mb-0 d-block"><%= userMaps.length %></h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Contributions</small>
               </li>
           </ul>
       </div>
   </main>
-
+<br/>
   <!-- Maps Container -->
-  <div class="maps">
+<div class="profile-cards">
+  <div class="row">
+    <div class="column">
+      <div class="cardOne">
 
-    <div class="row">
-      <!-- Favorites -->
-      <div class="col-md-4">
-        <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
-        <% for (let userFave of userFavs) { %>
-        <div class="card mb-4 shadow-sm">
-          <script>
-            <%= console.log(userFave) %>
-            let lat = <%= userFave.latitude %>;
-            let lon = <%= userFave.longitude %>;
-          </script>
-          <div id= "mapid" style="height: 200px"></div>
-          <div class="card-body">
-            <p class="card-text"><b>Map:</b> <%= userFave.title %><br><b>City:</b> <%= userFave.city %><br><b>Created By:</b> <%= userFave.username %></p>
-            <div class="button-box">
-              <form method="GET" action="/maps/<%= userFave.id %>/">
-                <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-              </form>
-              <form method="GET" action="/maps">
-                <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
-              </form>
-              <form method="POST" action="/maps">
-                <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
-              </form>
-            </div>
-          </div>
-        </div>
-        <% } %>
+        <ul class="list-group">
+          <li class="list-group-item"><button style="all: unset;" id="fav-button" type="submit">Favorites</button></li>
+          <li class="list-group-item"><button style="all: unset;" id="contri-button" type="submit">Contributions</button></li>
+          <li class="list-group-item"><button style="all: unset;" id="create-button" type="submit">Create New Map</button></li>
+        </ul>
+
       </div>
+    </div>
 
-      <!-- Contributions -->
 
-      <div class="col-md-4">
+    <div class="column" id="fav-card">
+      <div class="card">
 
-        <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
-        <% for (let userMap of userMaps) { %>
-        <div class="card mb-4 shadow-sm">
-          <script>
-            <%= console.log(userMap) %>
-            lat = <%= userMap.latitude %>;
-            lon = <%= userMap.longitude %>;
-          </script>
-          <div id="mapid" style="height: 200px; width: 200px;"></div>
-          <div class="card-body">
-            <p class="card-text"><b>Map:</b> <%= userMap.title %><br><b>City:</b> <%= userMap.city %><br><b>Created By:</b> <%= userMap.username %></p>
-            <form method="GET" action="/maps/<%= userMap.id %>/">
+        <p id="maps-title">Favorites <i class="fa-solid fa-sort-down"></i></p>
+      <% for (let userFave of userFavs) { %>
+        <div class="card-body">
+
+        <div id="mapFav<%= userFave.id %>" style="height: 200px"></div>
+        <input class="fav-id" type="hidden" value="<%= userFave.id %>">
+        <input class="fav-lat" type="hidden" value="<%= userFave.latitude %>">
+        <input class="fav-lon" type="hidden" value="<%= userFave.longitude %>">
+        <p class="card-text"><b>Map:</b> <%= userFave.title %><br><b>City:</b> <%= userFave.city %><br><b>Created By:</b> <%= userFave.username %></p>
+        <table>
+            <form method="GET" action="/maps/<%= userFave.id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form> &nbsp
+            <form method="GET" action="/maps">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></i></button>
+            </form> &nbsp
+            <form method="POST" action="/maps/<%= userFave.id %>">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
+            </form> &nbsp
+            <form method="POST" action="/maps/<%= userFave.id %>?_method=DELETE">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
             </form>
-            <form method="GET" action="/maps/">
-              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></button>
-            </form>
-            <form method="POST" action="/maps">
-              <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
-            </form>
-          </div>
+          </table>
         </div>
         <% } %>
       </div>
     </div>
 
 
-  <div class="container">
-    <h2>Create new Map</h2><hr>
-    <form class="form" method="POST" action="/profile">
-      <div class="form-group mb-2">
-        <label for="title">Title:</label>
-        <input class="form-control" type="text" name="title" placeholder="Enter map title...">
+    <div class="column" id="contri-card">
+      <div class="card">
+
+        <p id="maps-title">Contributions <i class="fa-solid fa-sort-down"></i></p>
+          <% for (let mapIndex in userMaps) { %>
+        <div class="card-body">
+
+          <div id= "mapContri<%= mapIndex %>" style="height: 200px"></div>
+          <input class="contri-id" type="hidden" value="<%= mapIndex %>">
+          <input class="contri-lat" type="hidden" value="<%= userMaps[mapIndex].latitude %>">
+          <input class="contri-lon" type="hidden" value="<%= userMaps[mapIndex].longitude %>">
+            <p class="card-text"><b>Map:</b> <%= userMaps[mapIndex].title %><br><b>City:</b> <%= userMaps[mapIndex].city %><br><b>Created By:</b> <%= userMaps[mapIndex].username %></p>
+          <table>
+            <form method="GET" action="/maps/<%= userMaps[mapIndex].id %>/">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            </form> &nbsp
+            <form method="GET" action="/maps">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Edit <i class="fa-solid fa-pen-to-square"></i></i></button>
+            </form> &nbsp
+            <form method="POST" action="/maps/<%= userMaps[mapIndex].id %>/">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+            </form> &nbsp
+            <!-- <form method="POST" action="/maps">
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
+            </form> -->
+          </table>
+        </div>
+        <% } %>
+      </div>
+    </div>
+
+
+
+    <div class="column" id="create-card">
+      <div class="card">
+
+        <div class="create-container">
+        <form class="form" method="POST" action="/profile">
+          <div class="form-group mb-2">
+            <label for="title">Title:</label>
+            <input style="width: 20em" class="form-control" type="text" name="title" placeholder="Enter map title...">
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="province">Province:</label><br/>
+            <select style="width: 20em; height: 2.5em;" name="province" id="province">
+              <option value="Choose a province">Choose a province</option>
+              <option value="Alberta">Alberta</option>
+              <option value="Ontario">Ontario</option>
+              <option value="British Columbia">British Columbia</option>
+            </select>
+
+          </div>
+
+          <div class="form-group mb-2">
+            <label for="city">City:</label><br/>
+            <select style="width: 20em; height: 2.5em;"  name="city" id="city">
+              <option value="Choose a city">Choose a city</option>
+              <option value="Calgary">Calgary</option>
+              <option value="Toronto">Toronto</option>
+              <option value="Vancouver">Vancouver</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn btn-info">Create Map</button>
+        </form>
       </div>
 
-      <div class="form-group mb-2">
-        <label for="province">Province:</label>
-        <input class="form-control" type="text" name="province" placeholder="Enter province...">
       </div>
-      <div class="form-group mb-2">
-        <label for="city">City:</label>
-        <input class="form-control" type="text" name="city" placeholder="Enter city...">
-      </div>
+    </div>
 
-      <button type="submit" class="btn btn-primary">Create Map</button>
-    </form>
 
   </div>
+</div>
+
+<br/>
+
+
 
 
 </body>
