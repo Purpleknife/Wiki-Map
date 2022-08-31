@@ -13,13 +13,42 @@ const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
 
 
+// GET /api/maps/:id/pins
+router.get('/:id/pins', (req, res) => {
+
+  mapId = req.params.id;
+  pinQueries.getPinsForMapById(mapId)
+  .then(requestedPins => {
+    const response = {
+      requestedPins
+    };
+
+    return res.json(response);
+    })
+    .catch(error => console.log(error.message));
+});
+
 // GET /api/maps/:id/favs
 router.get('/:id/favs', (req, res) => {
 
   userId = req.params.id;
   userQueries.getUserFavs(userId)
   .then(requestedMap => {
-    console.log(requestedMap);
+    const response = {
+      requestedMap
+    };
+
+    return res.json(response);
+    })
+    .catch(error => console.log(error.message));
+});
+
+// GET /api/maps/:id/cons
+router.get('/:id/cons', (req, res) => {
+
+  userId = req.params.id;
+  userQueries.getUserMaps(userId)
+  .then(requestedMap => {
     const response = {
       requestedMap
     };

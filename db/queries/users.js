@@ -116,7 +116,7 @@ const getUserMaps = (user_id, limit) => {
   FROM maps
   JOIN users ON user_id = users.id
   WHERE user_id = $1
-  LIMIT ${limit || 20};
+  LIMIT ${limit || 99};
   `;
 
   return db.query(queryString, queryParams)
@@ -137,11 +137,10 @@ const getUserFavs = (user_id, limit) => {
 
   const queryParams = [user_id];
   const queryString = `
-  SELECT maps.*, users.username, pins.*
+  SELECT maps.*, users.username
   FROM maps
   JOIN favorite_maps ON maps.id = map_id
   JOIN users ON maps.user_id = users.id
-  JOIN pins ON maps.id = pins.map_id
   WHERE maps.user_id = $1
   AND removed_at IS NULL
   LIMIT ${limit || 99};
