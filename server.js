@@ -39,8 +39,8 @@ const usersRoutes = require('./routes/users');
 const usersLoginRoutes = require('./routes/users');
 const mapRoutes = require('./routes/maps');
 const apiMapRoutes = require('./routes/api_maps');
-const apiProfileRoutes = require('./routes/api_profile');
-const apiIndexRoutes = require('./routes/api_index');
+// const apiProfileRoutes = require('./routes/api_profile');
+// const apiIndexRoutes = require('./routes/api_index');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own

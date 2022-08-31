@@ -13,7 +13,7 @@ const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
 
 
-// GET /api/maps/:id/pins
+// GET /api/maps/id/pins
 router.get('/:id/pins', (req, res) => {
 
   mapId = req.params.id;
@@ -28,7 +28,7 @@ router.get('/:id/pins', (req, res) => {
     .catch(error => console.log(error.message));
 });
 
-// GET /api/maps/:id/favs
+// GET /api/maps/id/favs
 router.get('/:id/favs', (req, res) => {
 
   userId = req.params.id;
@@ -43,7 +43,7 @@ router.get('/:id/favs', (req, res) => {
     .catch(error => console.log(error.message));
 });
 
-// GET /api/maps/:id/cons
+// GET /api/maps/id/cons
 router.get('/:id/cons', (req, res) => {
 
   userId = req.params.id;
