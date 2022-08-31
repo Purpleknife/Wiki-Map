@@ -43,15 +43,25 @@
 
 </head>
 
-<body style="height: 100vh; width: 100vw ;">
+<body>
   <%- include('partials/_nav') %>
-  <div style="width: 1000px; height: 800px;">
-    <div id="mapid" style="width: 100%; height: 100%;"></div>
-  </div>
+
+  <div id="mapid" style="width: 100%; height: 80vh;"></div>
 
   <input class="map-id" type="hidden" value="<%= requestedMap.id %>">
   <input class="user-id" type="hidden" value="<%= user.id %>">
 
+  <br/>
+  <div class="map-info">
+    <p> &nbsp; &nbsp; <i class="fa-solid fa-map-location-dot"></i> &nbsp; <strong>You're looking at:</strong> <%= requestedMap.title %>!</p>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-user-ninja"></i> &nbsp; <strong>Created by:</strong> <%= requestedMap.username %></p>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-location-pin"></i> &nbsp; <strong>Location:</strong> <%= requestedMap.city %>, <%= requestedMap.province %></p>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-thumbtack"></i> &nbsp; <strong>Number of pins:</strong> <%= pins.length %></p>
+    <% for (let pin of pins) { %>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-thumbtack"></i> &nbsp; <strong>- <%= pin.title %>:</strong> <%= pin.description %></p>
+    <% } %>
+  </div>
+  <br/>
 
 
 </body>

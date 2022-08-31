@@ -21,20 +21,25 @@ $(() => {
     pins.forEach(pin => {
 
       let formText = `
-      <button id='pin${pin.id}' class="btn btn-sm">Edit</button>
+      <br/>
+      <table>
+      <button id='pin${pin.id}' class="btn btn-sm">Edit</button> &nbsp; &nbsp;
       <form method="POST" action='/api/maps/${pin.id}/delete?_method=DELETE'>
         <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-      </form>`;
+      </form>
+      </table>`;
 
       if (!user_id) {
-        formText = `<i style="color: #ff0000">Please login or register to edit pins.</i>`;
+        formText = `<strong><i style="color: #ff0000">Please login or register to edit pins.</i></strong>`;
       }
 
       const marker = L.marker([pin.latitude, pin.longitude]).addTo(map);
       const savedMarker = marker.bindPopup(`
-      Title: ${pin.title}<br>
-      Description: ${pin.description}<br>
-      Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /><br>
+      <strong style="color: rgb(29, 112, 189);">Title:</strong> <strong>${pin.title}</strong><br/>
+      <br/>
+      <strong style="color: rgb(29, 112, 189);">Description:</strong> ${pin.description}<br/>
+      <br/>
+      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' style='height: 200px; width: 100%;' /><br/>
       ${formText}
       `);
       savedMarker.on('popupopen', () => {
@@ -49,18 +54,26 @@ $(() => {
 
     if (!user_id) {
       return marker.bindPopup(`
-        Title: <input type='text' name='title' value='${pin.title}'><br>
-        Description: <input type='text' name='description' value='${pin.description}'><br>
-        Image URL: <input type='text' name='image' value='${pin.image}'><br>
-        <i style="color: #ff0000">Please login or register to edit maps.</i>
+        </br>
+        <strong style="color: rgb(29, 112, 189);">Title:</strong> </br> <input type='text' name='title' value='${pin.title}'><br>
+        </br>
+        <strong style="color: rgb(29, 112, 189);">Description:</strong> </br> <input type='text' name='description' value='${pin.description}'><br>
+        </br>
+        <strong style="color: rgb(29, 112, 189);">Image URL:</strong> </br> <input type='text' name='image' value='${pin.image}'><br>
+        </br>
+        <strong><i style="color: #ff0000">Please login or register to edit maps.</i></strong>
       `);
     }
 
     marker.bindPopup(`
+    </br>
     <form method='POST' action='/api/maps/${pin.id}/update?_method=PUT'>
-      Title: <input type='text' name='title' value='${pin.title}'><br>
-      Description: <input type='text' name='description' value='${pin.description}'><br>
-      Image URL: <input type='text' name='image' value='${pin.image}'><br>
+      <strong style="color: rgb(29, 112, 189);">Title:</strong> </br> <input type='text' name='title' value='${pin.title}'><br>
+      </br>
+      <strong style="color: rgb(29, 112, 189);">Description:</strong> </br> <input type='text' name='description' value='${pin.description}'><br>
+      </br>
+      <strong style="color: rgb(29, 112, 189);">Image URL:</strong> </br> <input type='text' name='image' value='${pin.image}'><br>
+      </br>
       <button class="btn btn-sm">Accept</button>
     </form>
     `);
@@ -71,19 +84,23 @@ $(() => {
 
     let popup = L.popup();
     let pinText = `
-    Create Pin:</br>
+    <strong>Create Pin:</strong></br>
+    </br>
     <form method='POST' action='/api/maps/${map_id}/pins'>
       <input type='hidden' name='latitude' value='${e.latlng.lat}'>
       <input type='hidden' name='longitude' value='${e.latlng.lng}'>
-      Title: <input type='text' name='title'><br>
-      Description: <input type='text' name='description'><br>
-      Image URL: <input type='text' name='image'><br>
+      <strong style="color: rgb(29, 112, 189);">Title:</strong> </br> <input type='text' name='title'><br>
+      </br>
+      <strong style="color: rgb(29, 112, 189);">Description:</strong> </br> <input type='text' name='description'><br>
+      </br>
+      <strong style="color: rgb(29, 112, 189);">Image URL:</strong> </br> <input type='text' name='image'><br>
+      </br>
       <button class="btn btn-sm">Accept</button>
     </form>
     `;
 
     if (!user_id) {
-      pinText = `Please login to create pins.`
+      pinText = `<strong><i style="color: #ff0000">Please login or register to create pins.</i></strong>`
     }
 
     popup

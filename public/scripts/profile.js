@@ -1,5 +1,5 @@
 
-$(document).ready(() => {
+$(() => {
 
   const userId = document.querySelector('.user-id').value;
 
@@ -13,10 +13,21 @@ $(document).ready(() => {
     return data;
   }
 
+  const createMap = function(latitude, longitude, mapID) {
+
+    const map = L.map(`mapFav${mapID}`).setView([latitude, longitude], 13);
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19,
+        attribution: '© OpenStreetMap'
+    }).addTo(map);
+  }
+
   async function fetchPinsForMap(map_id) {
     let data = await (await fetch(`/api/maps/${map_id}/pins`)).json();
     return data;
   }
+
 
   const generateMap = (type, map) => {
     map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
@@ -30,6 +41,15 @@ $(document).ready(() => {
   };
 
   const generateHtml = (type, map) => {
+
+  // const createMapContri = function(latitude, longitude, mapID) {
+  //   const map = L.map(`mapContri${mapID}`).setView([latitude, longitude], 13);
+
+  //     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  //         maxZoom: 19,
+  //         attribution: '© OpenStreetMap'
+  //     }).addTo(map);
+
 
     // $('<button/>').text()
 
