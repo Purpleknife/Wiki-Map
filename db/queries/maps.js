@@ -9,8 +9,9 @@ const getMapById = (map_id) => {
 
   const queryParams = [map_id];
   const queryString = `
-  SELECT *
+  SELECT maps.*, users.username
   FROM maps
+  JOIN users ON users.id = maps.user_id
   WHERE maps.id = $1;
   `;
 

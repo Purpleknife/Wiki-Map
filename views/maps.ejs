@@ -54,7 +54,7 @@
   <br/>
   <div class="map-info">
     <p> &nbsp; &nbsp; <i class="fa-solid fa-map-location-dot"></i> &nbsp; <strong>You're looking at:</strong> <%= requestedMap.title %>!</p>
-    <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-user-ninja"></i> &nbsp; <strong>Created by:</strong> <%= user.username %></p>
+    <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-user-ninja"></i> &nbsp; <strong>Created by:</strong> <%= requestedMap.username %></p>
     <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-location-pin"></i> &nbsp; <strong>Location:</strong> <%= requestedMap.city %>, <%= requestedMap.province %></p>
     <p> &nbsp; &nbsp; &nbsp; &nbsp; <i class="fa-solid fa-thumbtack"></i> &nbsp; <strong>Number of pins:</strong> <%= pins.length %></p>
     <% for (let pin of pins) { %>
