@@ -110,7 +110,7 @@
               <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i style="color: red;" class="fa-solid fa-heart"></i></button>
             </form> &nbsp
             <form method="POST" action="/maps/<%= userFavs[favMapIndex].id %>?_method=DELETE">
-              <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
+              <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
             </form>
           </table>
         </div>
@@ -141,9 +141,9 @@
             <form method="POST" action="/maps/<%= userMaps[mapIndex].id %>/">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
             </form> &nbsp
-            <form method="POST" action="/maps">
+            <!-- <form method="POST" action="/maps">
               <button type="submit" class="btn btn-sm btn-outline-secondary">Delete <i class="fa-solid fa-trash-can"></i></button>
-            </form>
+            </form> -->
           </table>
         </div>
         <% } %>
@@ -164,13 +164,23 @@
 
           <div class="form-group mb-2">
             <label for="province">Province:</label><br/>
-            <input style="width: 20em; height: 2.5em;" class="form-control" type="text" name="province" placeholder="Enter province...">
+            <select style="width: 20em; height: 2.5em;" name="province" id="province">
+              <option value="Choose a province">Choose a province</option>
+              <option value="Alberta">Alberta</option>
+              <option value="Ontario">Ontario</option>
+              <option value="British Columbia">British Columbia</option>
+            </select>
 
           </div>
 
           <div class="form-group mb-2">
             <label for="city">City:</label><br/>
-            <input style="width: 20em; height: 2.5em;" class="form-control" type="text" name="city" placeholder="Enter city...">
+            <select style="width: 20em; height: 2.5em;"  name="city" id="city">
+              <option value="Choose a city">Choose a city</option>
+              <option value="Calgary">Calgary</option>
+              <option value="Toronto">Toronto</option>
+              <option value="Vancouver">Vancouver</option>
+            </select>
           </div>
 
           <button type="submit" class="btn btn-info">Create Map</button>
