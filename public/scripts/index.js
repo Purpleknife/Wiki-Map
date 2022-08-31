@@ -1,3 +1,10 @@
+
+
+
+
+
+
+// Old code
 //Maps that show on Main Page:
 
 const mapIdOne = L.map('mapid1').setView([51.505, -0.09], 13);
