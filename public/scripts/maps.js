@@ -2,7 +2,6 @@ $(() => {
 
   // globally available map variable
   let map;
-  let popup = L.popup();
 
   const generateMap = (lat, lon) => {
     map = L.map('mapid').setView([lat, lon], 13);
@@ -21,15 +20,54 @@ $(() => {
   const generatePins = (pins) => {
     pins.forEach(pin => {
       const marker = L.marker([pin.latitude, pin.longitude]).addTo(map);
-      marker.bindPopup(pin.title);
+      const savedMarker = marker.bindPopup(`
+      Title: ${pin.title}<br>
+      Description: ${pin.description}<br>
+      Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /><br>
+      <button id='pin${pin.id}' class="btn btn-sm">Edit</button>
+      <form method="DELETE" action='/api/maps/${pin.id}/delete'>
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+      `);
+      savedMarker.on('popupopen', () => {
+        $(`#pin${pin.id}`).on('click', () => {
+          createPin();
+        });
+      })
     });
   };
 
+
+  const createPin = () => {
+
+    console.log('createPin');
+    test();
+    const newPinForm = `
+    <form method='POST' action=''>
+      Title: </br>
+      Description: </br>
+      Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /></br>
+      <button class="btn btn-sm">Edit</button>
+    </form>`;
+
+  };
+
+
   const onMapClick = (e) => {
+    let popup = L.popup();
     popup
-    .setLatLng(e.latlng)
-    .setContent(`Add pin here?`)
+      .setLatLng(e.latlng)
+      .setContent(`
+      Add pin here?</br>
+      <form onsubmit='createPin()'>
+        <button type='submit'>Create</button>
+      </form>
+      `)
     .openOn(map);
+  }
+
+  const test = () => {
+    console.log('test');
   }
 
   $.get('/api/maps/' + map_id).then((res) => {
@@ -41,30 +79,4 @@ $(() => {
     generatePins(pins);
   })
 
-
-
-
-
-  //Setup the map that's gonna show up in maps, depending on the id of the map requested:
-
-
-
-  const getAllPinsFromDb = function(map_id) {
-
-
-
-    // const marker = L.marker([obj.latitude, obj.longitude]).addTo(map)
-    // marker.bindPopup(`
-    // <p>Title: ${obj.title}</p>
-    // <p>Description: ${obj.description}</p>
-    // <img src="${obj.image}"  class="img-pin">
-    // <p>Created by: ${obj.id}</p>
-    // <form method="POST" action='/maps/${obj.id}/delete'>
-    //   <button type="submit" class="btn btn-danger btn-sm">Delete</button>
-    // </form>
-    // `);
-  };
-
 });
-
-

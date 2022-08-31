@@ -37,4 +37,13 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 
 // POST /api/maps/id/pins
 
+
+// DELETE /api/maps/id/delete
+router.delete('/:id/delete', (req, res) => {
+
+  pinId = req.params.id;
+  console.log('In router.delete', pinId);
+
+});
+
 module.exports = router;
