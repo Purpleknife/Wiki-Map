@@ -38,14 +38,22 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 // POST /api/maps/id/pins
 router.post('/:id/pins', (req, res) => {
 
-  console.log(req.body);
+  const map_id = req.params.id;
+  const { title, description, image, latitude, longitude } = req.body;
+  const pin = {
+    map_id,
+    title,
+    description,
+    image,
+    latitude,
+    longitude
+  }
 
-
-  // pinQueries.addPin()
-  //   .then(data => {
-  //     res.redirect(`/maps/${data.map_id}`);
-  //   })
-  //   .catch(error => console.log(error.message));
+  pinQueries.addPin(pin)
+    .then(data => {
+      res.redirect(`/maps/${data.map_id}`);
+    })
+    .catch(error => console.log(error.message));
 });
 
 // PUT /api/maps/id/update

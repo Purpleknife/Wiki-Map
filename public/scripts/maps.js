@@ -57,6 +57,8 @@ $(() => {
       .setContent(`
       Create Pin:</br>
       <form method='POST' action='/api/maps/${map_id}/pins'>
+        <input type='hidden' name='latitude' value='${e.latlng.lat}'>
+        <input type='hidden' name='longitude' value='${e.latlng.lng}'>
         Title: <input type='text' name='title'><br>
         Description: <input type='text' name='description'><br>
         Image URL: <input type='text' name='image'><br>
