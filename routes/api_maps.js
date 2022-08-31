@@ -8,11 +8,29 @@
 const express = require('express');
 const { render } = require('sass');
 const router  = express.Router();
+const userQueries = require('../db/queries/users');
 const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
 
+
+// GET /api/maps/:id/favs
+router.get('/:id/favs', (req, res) => {
+
+  userId = req.params.id;
+  userQueries.getUserFavs(userId)
+  .then(requestedMap => {
+    console.log(requestedMap);
+    const response = {
+      requestedMap
+    };
+
+    return res.json(response);
+    })
+    .catch(error => console.log(error.message));
+});
+
 // GET /api/maps/id
-router.get('/:id', (req, res) => { //Setup routes for /maps.
+router.get('/:id', (req, res) => {
 
   mapId = req.params.id;
   mapQueries.getMapById(mapId)

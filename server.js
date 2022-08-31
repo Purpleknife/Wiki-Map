@@ -33,13 +33,14 @@ app.use(
 );
 app.use(express.static('public'));
 
-app.use(methodOverride('_method'));
 // Separated Routes for each Resource
 // Note: Feel free to replace the example routes below with your own
 const usersRoutes = require('./routes/users');
 const usersLoginRoutes = require('./routes/users');
 const mapRoutes = require('./routes/maps');
-const apimapRoutes = require('./routes/api_maps');
+const apiMapRoutes = require('./routes/api_maps');
+const apiProfileRoutes = require('./routes/api_profile');
+const apiIndexRoutes = require('./routes/api_index');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -49,7 +50,9 @@ app.use('/login', usersLoginRoutes);
 app.use('/logout', usersLoginRoutes);
 app.use('/', usersLoginRoutes);
 app.use('/maps', mapRoutes);
-app.use('/api/maps', apimapRoutes);
+app.use('/api/maps', apiMapRoutes);
+// app.use('/api/profile', apiProfileRoutes);
+// app.use('/api/index', apiIndexRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -66,12 +69,11 @@ app.get('/', (req, res) => {
   const templateVars = {
     user
   };
-  console.log(templateVars);
+
   res.render('index', templateVars);
 });
 const favRoutes = require('./routes/favorite');
 app.use('/maps', favRoutes);
-//app.use('/maps/delete', favRoutes);
 
 
 app.listen(PORT, () => {
