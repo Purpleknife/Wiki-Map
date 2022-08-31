@@ -31,27 +31,27 @@ $(() => {
       `);
       savedMarker.on('popupopen', () => {
         $(`#pin${pin.id}`).on('click', () => {
-          createPin();
+          editPin(savedMarker, pin);
         });
-      })
+      });
     });
   };
 
 
-  const createPin = () => {
+  const editPin = (marker, pin) => {
 
-    console.log('createPin');
-    test();
-    const newPinForm = `
-    <form method='POST' action=''>
-      Title: </br>
-      Description: </br>
-      Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /></br>
-      <button class="btn btn-sm">Edit</button>
-    </form>`;
+    console.log('Marker', marker);
+    console.log('Saved pin', pin);
+    marker.bindPopup(`
+    <form method='PUT' action='/api/maps/${pin.id}/update'>
+      Title: <input type='text' name='pinTitle' value='${pin.title}'><br>
+      Description: <input type='text' name='pinDescription' value='${pin.description}'><br>
+      Image URL: <input type='text' name='pinUrl'  value='${pin.image}'><br>
+      <button class="btn btn-sm">Accept</button>
+    </form>`
+    );
 
   };
-
 
   const onMapClick = (e) => {
     let popup = L.popup();
@@ -64,10 +64,6 @@ $(() => {
       </form>
       `)
     .openOn(map);
-  }
-
-  const test = () => {
-    console.log('test');
   }
 
   $.get('/api/maps/' + map_id).then((res) => {

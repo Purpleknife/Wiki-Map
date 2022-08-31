@@ -38,6 +38,13 @@ router.get('/:id', (req, res) => { //Setup routes for /maps.
 // POST /api/maps/id/pins
 
 
+// PUT /api/maps/id/update
+router.put('/:id/update', (req, res) => {
+
+  console.log('In router.put');
+
+})
+
 // DELETE /api/maps/id/delete
 router.delete('/:id/delete', (req, res) => {
 
