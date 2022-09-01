@@ -62,8 +62,9 @@ const getAllMaps = (options, limit = 10) => {
 
   let queryParams = [];
   let queryString = `
-  SELECT *
+  SELECT maps.*, users.username
   FROM maps
+  JOIN users ON users.id = maps.user_id
   `;
 
   if (options.user_id) {

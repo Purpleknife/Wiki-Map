@@ -139,9 +139,9 @@ const getUserFavs = (user_id, limit) => {
   const queryString = `
   SELECT maps.*, users.username
   FROM maps
-  JOIN favorite_maps ON maps.id = map_id
+  JOIN favorite_maps ON maps.id = favorite_maps.map_id
   JOIN users ON maps.user_id = users.id
-  WHERE maps.user_id = $1
+  WHERE favorite_maps.user_id = $1
   AND removed_at IS NULL
   LIMIT ${limit || 99};
   `;

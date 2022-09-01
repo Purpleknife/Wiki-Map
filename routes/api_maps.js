@@ -12,6 +12,29 @@ const userQueries = require('../db/queries/users');
 const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
 
+// router.get('/properties', (req, res) => {
+//   database.getAllProperties(req.query, 20)
+//   .then(properties => res.send({properties}))
+//   .catch(e => {
+//     console.error(e);
+//     res.send(e)
+//   });
+// });
+
+
+// GET /api/maps/all
+router.get('/all', (req, res) => {
+  mapQueries.getAllMaps(req.query)
+  .then(requestedMaps => {
+
+    const response = {
+      requestedMaps
+    };
+
+    return res.json(response);
+    })
+    .catch(error => console.log(error.message));
+});
 
 // GET /api/maps/id/pins
 router.get('/:id/pins', (req, res) => {

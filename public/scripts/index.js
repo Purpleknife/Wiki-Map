@@ -2,13 +2,8 @@ $(() => {
 
 
 
-  async function fetchFavs() {
-    let data = await (await fetch(`/api/maps/${userId}/favs`)).json();
-    return data;
-  }
-
-  async function fetchCons() {
-    let data = await (await fetch(`/api/maps/${userId}/cons`)).json();
+  async function fetchMaps() {
+    let data = await (await fetch(`/api/maps/all`)).json();
     return data;
   }
 
@@ -33,23 +28,27 @@ $(() => {
   const generateHtml = (type, map) => {
 
     return htmlText = `
-    <div id="${type + map.id}" style="height: 200px"></div>
-    <br/>
-    <p class="card-text"><b>Map:</b> ${map.title}<br><b>City:</b> ${map.city}<br><b>Created By:</b> ${map.username}</p>
-    <div>
+    <div class="col-md-4">
+      <div class="card mb-4 shadow-sm">
+        <div id="${type + map.id}" style="height: 200px"></div>
+        <br/>
+        <p class="card-text"><b>Map:</b> ${map.title}<br><b>City:</b> ${map.city}<br><b>Created By:</b> ${map.username}</p>
+        <div>
 
-      <form method="GET" action="/maps/${map.id}/">
-        <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
-      </form> &nbsp;
-      <form method="POST" action="/maps/${map.id}">
-        <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
-      </form> &nbsp;
-      <form method="POST" action="/maps/${map.id}?_method=DELETE">
-        <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
-      </form>
+          <form method="GET" action="/maps/${map.id}/">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+          </form> &nbsp;
+          <form method="POST" action="/maps/${map.id}">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+          </form> &nbsp;
+          <form method="POST" action="/maps/${map.id}?_method=DELETE">
+            <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
+          </form>
 
-    </div>
-    <br/>`;
+        </div>
+        <br/>
+      </div>
+    </div>`;
 
   }
 
@@ -78,25 +77,23 @@ $(() => {
     });
   };
 
-  fetchFavs()
+  fetchMaps()
     .then(maps => {
 
-      $('#fav-maps-container').empty();
+      maps.requestedMaps.forEach(map => {
 
-      maps.requestedMap.forEach(map => {
+        const mapHtml = generateHtml('map', map);
 
-        const mapHtml = generateHtml('fav', map);
+        $('#map-container').prepend(mapHtml);
 
-        $('#fav-maps-container').prepend(mapHtml);
-
-        const mapRef = generateMap('fav', map);
+        const mapRef = generateMap('map', map);
 
         fetchPinsForMap(map.id)
           .then(pins => {
 
             generatePins(mapRef, pins.requestedPins);
+
           })
-          .catch(err => console.log(err.message));
       });
     })
     .catch(error => console.log(error.message));
