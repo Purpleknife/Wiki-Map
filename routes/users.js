@@ -59,6 +59,11 @@ router.post('/profile', (req, res) => { //Setup route for map creation in user p
   const userId = req.session.user_id;
   mapQueries.addMap({...req.body, user_id: userId, latitude, longitude})
     .then(map => {
+
+      const map_id = map.id;
+      mapQueries.addContribution({map_id, user_id: userId})
+        .then(addedContribution => console.log(addedContribution))
+
       res.redirect(`/maps/${map.id}`);
     })
     .catch(error => console.log(error.message));

@@ -6,6 +6,7 @@ $(() => {
   const user_id = document.querySelector('.user-id').value;
 
 
+
   const generateMap = (lat, lon) => {
     map = L.map('mapid').setView([lat, lon], 12);
 
@@ -75,7 +76,7 @@ $(() => {
       </br>
       <strong style="color: rgb(29, 112, 189);">Image URL:</strong> </br> <input type='text' name='image' value='${pin.image}'><br>
       </br>
-      <button class="btn btn-sm">Accept</button>
+      <button onclick="acceptClicked()" class="btn btn-sm">Accept</button>
     </form>
     `);
 
@@ -96,7 +97,7 @@ $(() => {
       </br>
       <strong style="color: rgb(29, 112, 189);">Image URL:</strong> </br> <input type='text' name='image'><br>
       </br>
-      <button class="btn btn-sm">Accept</button>
+      <button id="accept" onclick="acceptClicked()" class="btn btn-sm">Accept</button>
     </form>
     `;
 
@@ -121,3 +122,21 @@ $(() => {
   })
 
 });
+
+
+
+const acceptClicked = () => {
+
+  // const map_id = document.querySelector('.map-id').value;
+  // const user_id = document.querySelector('.user-id').value;
+
+  // async function fetchMaps(e) {
+  //   e.preventDefault();
+  //   let data = await (await fetch(`/api/maps/${user_id}/${map_id}`)).json();
+  //   return data;
+  // }
+
+  // fetchMaps(e)
+  //   .then(res => console.log(res))
+  //   .catch(err => console.log(err));
+}

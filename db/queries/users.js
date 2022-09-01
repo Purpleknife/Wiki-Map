@@ -111,12 +111,22 @@ exports.addUser = addUser;
 const getUserMaps = (user_id, limit) => {
 
   const queryParams = [user_id];
+  // const queryString = `
+  // SELECT DISTINCT maps.*, users.username
+  // FROM maps
+  // JOIN users ON user_id = users.id
+  // JOIN contributions ON contributions.user_id = maps.user_id
+  // WHERE contributions.map_id = maps.id
+  // AND contributions.user_id = $1
+  // LIMIT ${limit || 99};
+  // `;
+
   const queryString = `
-  SELECT DISTINCT maps.*, users.username
-  FROM maps
-  JOIN users ON user_id = users.id
-  WHERE user_id = $1
-  LIMIT ${limit || 99};
+  SELECT DISTINCT maps.*, users.username, contributions.user_id as con_user_id
+  FROM contributions
+  JOIN maps ON contributions.map_id = maps.id
+  JOIN users ON contributions.user_id = users.id
+  WHERE contributions.user_id = $1;
   `;
 
   return db.query(queryString, queryParams)

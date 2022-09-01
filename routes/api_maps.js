@@ -105,11 +105,26 @@ router.get('/:id', (req, res) => {
 // POST /api/maps/id/pins
 router.post('/:id/pins', (req, res) => {
 
-  // if (!req.session.user_id) { //If not logged in, redirect to home page.
-  //   console.error('You must be logged in to contribute to maps.');
-  // }
-
   const map_id = req.params.id;
+  const user_id = req.session.user_id;
+
+  userQueries.getUserMaps(user_id)
+    .then(cons => {
+      let hasContributed = false;
+
+      cons.forEach(con => {
+        if (con.id == map_id && con.con_user_id == user_id) {
+          hasContributed = true;
+        }
+      });
+
+      if (!hasContributed){
+        mapQueries.addContribution({map_id, user_id})
+          .then(addedContribution => console.log('check', addedContribution))
+      }
+    })
+    .catch(err => console.log(err));
+
   const { title, description, image, latitude, longitude } = req.body;
   const pin = {
     map_id,
@@ -130,6 +145,7 @@ router.post('/:id/pins', (req, res) => {
 // PUT /api/maps/id/update
 router.put('/:id/update', (req, res) => {
 
+
   const pinId = req.params.id;
   const title = req.body.title;
   const description = req.body.description;
@@ -138,6 +154,12 @@ router.put('/:id/update', (req, res) => {
 
   pinQueries.updatePins(pinId, options)
   .then(data => {
+
+    const userId = req.session.user_id;
+    console.log('Put edit pin', userId);
+    // mapQueries.addContribution({map_id, user_id})
+    //   .then(addedContribution => console.log(addedContribution))
+
     res.redirect(`/maps/${data.map_id}`);
   })
   .catch(error => console.log(error.message));

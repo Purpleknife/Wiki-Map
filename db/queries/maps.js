@@ -204,3 +204,30 @@ const deleteFavMap = (map) => {
 
 };
 exports.deleteFavMap = deleteFavMap;
+
+/**
+ *
+ * @param {{}} map object containing user_id, map_id
+ * @returns Promise<{}> object of new fav map
+ */
+ const addContribution = (map) => {
+
+  const { user_id, map_id } = map;
+
+  console.log(user_id, map_id);
+
+  const queryParams = [user_id, map_id];
+  const queryString = `
+  INSERT INTO contributions (user_id, map_id)
+  VALUES ($1, $2)
+  RETURNING *;
+  `;
+
+  return db.query(queryString, queryParams)
+    .then(data => {
+      return data.rows[0];
+    })
+    .catch(error => console.log(error.message));
+
+};
+exports.addContribution = addContribution;

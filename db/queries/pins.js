@@ -59,7 +59,6 @@ const updatePins = (pin_id, options) => {
   queryString += `
   WHERE pins.id = $${queryParams.length}
   RETURNING *;`;
-  console.log(queryString, queryParams);
 
   return db.query(queryString, queryParams)
     .then(data => {
