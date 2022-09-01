@@ -39,6 +39,7 @@ const usersRoutes = require('./routes/users');
 const usersLoginRoutes = require('./routes/users');
 const mapRoutes = require('./routes/maps');
 const apiMapRoutes = require('./routes/api_maps');
+const favRoutes = require('./routes/favorite');
 // const apiProfileRoutes = require('./routes/api_profile');
 // const apiIndexRoutes = require('./routes/api_index');
 
@@ -48,9 +49,12 @@ const apiMapRoutes = require('./routes/api_maps');
 app.use('/users', usersRoutes);
 app.use('/login', usersLoginRoutes);
 app.use('/logout', usersLoginRoutes);
+app.use('/register', usersLoginRoutes);
 app.use('/', usersLoginRoutes);
 app.use('/maps', mapRoutes);
 app.use('/api/maps', apiMapRoutes);
+app.use('/maps', favRoutes);
+
 // app.use('/api/profile', apiProfileRoutes);
 // app.use('/api/index', apiIndexRoutes);
 // Note: mount other resources here, using the same pattern above
@@ -72,8 +76,8 @@ app.get('/', (req, res) => {
 
   res.render('index', templateVars);
 });
-const favRoutes = require('./routes/favorite');
-app.use('/maps', favRoutes);
+
+
 
 
 app.listen(PORT, () => {
