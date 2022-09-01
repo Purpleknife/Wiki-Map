@@ -14,7 +14,7 @@ $(() => {
 
   const generateMap = (type, map) => {
 
-    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
+    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -84,7 +84,8 @@ $(() => {
     });
   };
 
-  fetchMaps()
+  const loadAllMaps = () => {
+    fetchMaps()
     .then(maps => {
 
       maps.requestedMaps.forEach(map => {
@@ -104,6 +105,8 @@ $(() => {
       });
     })
     .catch(error => console.log(error.message));
+  };
+  loadAllMaps();
 
 });
 

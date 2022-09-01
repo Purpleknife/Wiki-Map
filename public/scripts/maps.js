@@ -6,7 +6,7 @@ $(() => {
   const user_id = document.querySelector('.user-id').value;
 
   const generateMap = (lat, lon) => {
-    map = L.map('mapid').setView([lat, lon], 13);
+    map = L.map('mapid').setView([lat, lon], 12);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
