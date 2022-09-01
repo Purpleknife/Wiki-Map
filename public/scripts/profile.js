@@ -24,7 +24,7 @@ $(() => {
 
   const generateMap = (type, map) => { //Generates a Leaflet map.
 
-    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
+    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
