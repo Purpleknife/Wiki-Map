@@ -87,7 +87,7 @@ $(() => {
       const savedMarker = marker.bindPopup(`
       Title: ${pin.title}<br>
       Description: ${pin.description}<br>
-      Image: <img src='${pin.image}' style='height: 100px; width: 100px;' /><br>
+      Image: <img src='${pin.image}' alt='No Image' style='height: 100px; width: 100px;' /><br>
       ${formText}
       `);
       savedMarker.on('popupopen', () => {

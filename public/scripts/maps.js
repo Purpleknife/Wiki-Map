@@ -46,7 +46,7 @@ $(() => {
       <br/>
       <strong style="color: rgb(29, 112, 189);">Description:</strong> ${pin.description}<br/>
       <br/>
-      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' style='height: 200px; width: 100%;' /><br/>
+      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' alt='No Image' style='height: 200px; width: 100%;' /><br/>
       ${formText}
       `;
 
@@ -56,7 +56,7 @@ $(() => {
       <br/>
       <strong style="color: rgb(29, 112, 189);">Description:</strong> ${pin.description}<br/>
       <br/>
-      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' style='height: 200px; width: 100%;' /><br/>
+      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' alt='No Image' style='height: 200px; width: 100%;' /><br/>
       ${formText}
       `);
       savedMarker.on('popupopen', () => {
