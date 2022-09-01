@@ -112,7 +112,7 @@ const getUserMaps = (user_id, limit) => {
 
   const queryParams = [user_id];
   const queryString = `
-  SELECT maps.*, users.username
+  SELECT DISTINCT maps.*, users.username
   FROM maps
   JOIN users ON user_id = users.id
   WHERE user_id = $1
@@ -137,7 +137,7 @@ const getUserFavs = (user_id, limit) => {
 
   const queryParams = [user_id];
   const queryString = `
-  SELECT maps.*, users.username
+  SELECT DISTINCT maps.*, users.username
   FROM maps
   JOIN favorite_maps ON maps.id = favorite_maps.map_id
   JOIN users ON maps.user_id = users.id
