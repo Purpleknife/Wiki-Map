@@ -142,33 +142,34 @@ header {
   max-height: 180px;
 }
 
-#mapid1 {
-  height: 180px;
-  padding: 0;
-	margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#mapid2 {
-  height: 180px;
-  padding: 0;
-	margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-#mapid3 {
-  height: 180px;
-  padding: 0;
-	margin: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .col-md-4 {
   display: inline;
+}
+
+form {
+  display: inline-block;
+  padding-left: 1em;
+}
+
+.card-text {
+  padding-left: 1em;
+}
+
+#heart-icon:hover {
+  color: red;
+  border-color: red;
+  background-color: white;
+}
+
+#view-icon:hover {
+  color: #7ec7dd;
+  border-color: #7ec7dd;
+  background-color: white;
+}
+
+#remove-icon:hover {
+  color: rgb(207, 132, 18);
+  border-color: rgb(207, 132, 18);
+  background-color: white;
 }

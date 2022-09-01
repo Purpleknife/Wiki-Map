@@ -72,3 +72,21 @@ table {
 form {
   display: inline-block;
 }
+
+#heart-icon:hover {
+  color: red;
+  border-color: red;
+  background-color: white;
+}
+
+#view-icon:hover {
+  color: #7ec7dd;
+  border-color: #7ec7dd;
+  background-color: white;
+}
+
+#remove-icon:hover {
+  color: rgb(207, 132, 18);
+  border-color: rgb(207, 132, 18);
+  background-color: white;
+}

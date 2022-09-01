@@ -41,10 +41,10 @@ $(() => {
         <p class="card-text"><b>Map:</b> ${map.title}<br><b>City:</b> ${map.city}<br><b>Created By:</b> ${map.username}</p>
         <div>
           <form method="GET" action="/maps/${map.id}/">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="submit" id="view-icon" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
           </form> &nbsp;
           <form method="POST" action="/maps/${map.id}?_method=DELETE">
-            <button type="submit" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
+            <button type="submit" id="remove-icon" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
           </form>
         </div>
         <br/>`;
@@ -57,10 +57,10 @@ $(() => {
       <p class="card-text"><b>Map:</b> ${map.title}<br><b>City:</b> ${map.city}<br><b>Created By:</b> ${map.username}</p>
       <div>
         <form method="GET" action="/maps/${map.id}/">
-          <button type="submit" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+          <button type="submit" id="view-icon" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
         </form> &nbsp;
         <form method="POST" action="/maps/${map.id}">
-          <button type="submit" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+          <button type="submit" id="heart-icon" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
         </form> &nbsp;
       </div>
       <br/>`;
