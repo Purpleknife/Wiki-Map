@@ -5,6 +5,7 @@ $(() => {
   const map_id = document.querySelector('.map-id').value;
   const user_id = document.querySelector('.user-id').value;
 
+
   const generateMap = (lat, lon) => {
     map = L.map('mapid').setView([lat, lon], 13);
 
@@ -116,6 +117,7 @@ $(() => {
 
     generateMap(lat, lon);
     generatePins(pins);
+
   })
 
 });

@@ -89,9 +89,12 @@ $(() => {
       savedMarker.on('popupopen', () => {
         $(`#pin${pin.id}`).on('click', () => {
           editPin(savedMarker, pin);
+
         });
+
       });
     });
+
   };
 
   //To make Favorites, Contributions and Create new Map, show up when the buttons are clicked:
