@@ -1,5 +1,11 @@
-$(() => {
+/**
+ * This file adds maps to the home page (index.ejs).
+ * It has access to the database through async await functions at the top.
+ */
 
+ $(() => {
+
+  //Variable fetched from index.ejs:
   const user_id = document.querySelector('.user-id').value;
 
   async function fetchMaps() {
@@ -12,9 +18,9 @@ $(() => {
     return data;
   }
 
-  const generateMap = (type, map) => {
+  const generateMap = (type, map) => { //Generates a Leaflet map.
 
-    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 10);
+    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -31,7 +37,7 @@ $(() => {
     if (user_id) {
       optionalText = `
         <form method="POST" action="/maps/${map.id}">
-        <button type="submit" id="heart-icon" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+        <button type="submit" id="heart-icon" class="btn btn-sm btn-outline-secondary mb-3">Favorite <i class="fa-solid fa-heart"></i></button>
         </form>`;
     }
 
@@ -46,7 +52,7 @@ $(() => {
         <div>
 
           <form method="GET" action="/maps/${map.id}/">
-            <button type="submit" id="view-icon" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
+            <button type="submit" id="view-icon" class="btn btn-sm btn-outline-secondary mb-3">View <i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
           ${optionalText}
 
@@ -59,7 +65,7 @@ $(() => {
 
   }
 
-  const generatePins = (map, pins) => {
+  const generatePins = (map, pins) => { //Generates pins in home page.
 
     pins.forEach(pin => {
 
@@ -109,42 +115,6 @@ $(() => {
   loadAllMaps();
 
 });
-
-
-
-// Old code
-//Maps that show on Main Page:
-
-// const mapIdOne = L.map('mapid1').setView([51.505, -0.09], 13);
-
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     maxZoom: 19,
-//     attribution: '© OpenStreetMap'
-// }).addTo(mapIdOne);
-
-// const markerOne = L.marker([51.5, -0.09]).addTo(mapIdOne);
-
-
-
-// const mapIdTwo = L.map('mapid2').setView([51.505, -0.09], 13);
-
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     maxZoom: 19,
-//     attribution: '© OpenStreetMap'
-// }).addTo(mapIdTwo);
-
-// const markerTwo = L.marker([51.5, -0.09]).addTo(mapIdTwo);
-
-
-
-// const mapIdThree = L.map('mapid3').setView([51.505, -0.09], 13);
-
-// L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-//     maxZoom: 19,
-//     attribution: '© OpenStreetMap'
-// }).addTo(mapIdThree);
-
-// const markerThree = L.marker([51.5, -0.09]).addTo(mapIdThree);
 
 
 //For drop down menu in search bar:

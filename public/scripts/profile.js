@@ -1,3 +1,7 @@
+/**
+ * This file adds maps to the user profile.
+ * It has access to the database through async await functions at the top.
+ */
 
 $(() => {
 
@@ -18,7 +22,7 @@ $(() => {
     return data;
   }
 
-  const generateMap = (type, map) => {
+  const generateMap = (type, map) => { //Generates a Leaflet map.
 
     map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
 
@@ -31,7 +35,7 @@ $(() => {
 
   };
 
-  const generateHtml = (type, map) => {
+  const generateHtml = (type, map) => { // Generates html template for the map and map interactions
     let htmlText = '';
 
     if (type === 'fav') {
@@ -69,7 +73,7 @@ $(() => {
     return htmlText;
   }
 
-  const generatePins = (map, pins) => {
+  const generatePins = (map, pins) => { // Grabs all the pins for a map from the database and renders them
 
     pins.forEach(pin => {
 
@@ -89,13 +93,12 @@ $(() => {
       savedMarker.on('popupopen', () => {
         $(`#pin${pin.id}`).on('click', () => {
           editPin(savedMarker, pin);
-
         });
-
       });
     });
 
   };
+
 
   //To make Favorites, Contributions and Create new Map, show up when the buttons are clicked:
 
@@ -110,12 +113,13 @@ $(() => {
   $favDiv.hide();
   $contriDiv.hide();
 
-  $favButton.on('click', function() {
+  $favButton.on('click', function() { //When you click on "Favorites" button in Profile.
 
     $('#fav-card').show();
     $createDiv.hide();
     $contriDiv.hide();
 
+    // Async function that returns a promise from the db with the users fav maps
     fetchFavs()
     .then(maps => {
 
@@ -131,7 +135,6 @@ $(() => {
 
         fetchPinsForMap(map.id)
           .then(pins => {
-
             generatePins(mapRef, pins.requestedPins);
           })
           .catch(err => console.log(err.message));
@@ -140,11 +143,12 @@ $(() => {
     .catch(error => console.log(error.message));
   });
 
-  $contriButton.on('click', function() {
+  $contriButton.on('click', function() {  //When you click on "Contributions" button in Profile.
     $('#contri-card').show();
     $favDiv.hide();
     $createDiv.hide();
 
+    // Async function that returns a promise from the db with the users contributed maps
     fetchCons()
     .then(maps => {
 
@@ -166,19 +170,10 @@ $(() => {
     .catch(error => console.log(error.message));
   });
 
-  $createButton.on('click', function() {
+  $createButton.on('click', function() {  //When you click on "Create new Map" button in Profile.
     $('#create-card').show();
     $favDiv.hide();
     $contriDiv.hide();
   });
 
 });
-
-
-//To check if the user is in the profile page:
-const checkIfOnProfilePage = function() {
-  if (document.URL.includes("profile")) {
-    return true;
-  }
-  return false;
-}

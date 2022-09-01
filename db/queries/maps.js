@@ -214,8 +214,6 @@ exports.deleteFavMap = deleteFavMap;
 
   const { user_id, map_id } = map;
 
-  console.log(user_id, map_id);
-
   const queryParams = [user_id, map_id];
   const queryString = `
   INSERT INTO contributions (user_id, map_id)

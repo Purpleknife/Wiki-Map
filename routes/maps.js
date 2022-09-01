@@ -13,9 +13,6 @@ const pinQueries = require('../db/queries/pins');
 
 
 router.get('/:id', (req, res) => { //Setup routes for /maps.
-  if (!req.session.user_id) { //If not logged in, redirect to home page.
-    // return res.redirect('/');
-  }
 
   mapId = req.params.id;
   mapQueries.getMapById(mapId)

@@ -19,6 +19,10 @@ const locations = {
 }
 
 router.get('/profile', (req, res) => { //Setup route for user profile.
+  if (!req.session.user_id) {
+    return res.redirect('/');
+  }
+
   const templateVars = {};
 
   userQueries.getUsersById(req.session.user_id)
@@ -87,15 +91,15 @@ router.get('/:id', (req, res) => { //Setup route for login without a form page.
 
 
 
-router.post('/register/new', (req, res) => { //Setup route for Register button.
+router.post('/register/new', (req, res) => { //Setup route for Register button without a form page.
 
   const usernameList = ['Ryan', 'Nikita', 'Jason', 'Michael', 'Pam'];
+  const randomNum = Math.floor(Math.random() * usernameList.length);
+  const randomUsername = usernameList[randomNum];
 
   const user = req.body;
 
-  for (let randomUsername of usernameList) {
-    user.username = randomUsername;
-  }
+  user.username = randomUsername;
   user.city = 'Calgary';
   user.province = 'Alberta';
   user.password = 'happykitty';
@@ -106,7 +110,7 @@ router.post('/register/new', (req, res) => { //Setup route for Register button.
 
     req.session.user_id = registeredUser.id;
 
-    if (req.session.user_id) { //If logged in, redirect.
+    if (req.session.user_id) { //If logged in, redirect and login.
       return res.redirect(`/login/${registeredUser.id}`);
     }
   })

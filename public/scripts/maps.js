@@ -1,10 +1,16 @@
+/**
+ * Loads the map on the main viewing page. Lots of potential helper functions in here with
+ * crossover in profile and index scripts. Uses Ajax to grab data from db on page load.
+ */
+
 $(() => {
 
   // globally available map variable
   let map;
+
+  //Variables fetched from maps.ejs:
   const map_id = document.querySelector('.map-id').value;
   const user_id = document.querySelector('.user-id').value;
-
 
 
   const generateMap = (lat, lon) => {
@@ -18,7 +24,7 @@ $(() => {
     map.on('click', onMapClick);
   };
 
-  const generatePins = (pins) => {
+  const generatePins = (pins) => { //Generates pins in /maps.
 
     pins.forEach(pin => {
 
@@ -35,6 +41,15 @@ $(() => {
         formText = `<strong><i style="color: #ff0000">Please login or register to edit pins.</i></strong>`;
       }
 
+      const fullText = `
+      <strong style="color: rgb(29, 112, 189);">Title:</strong> <strong>${pin.title}</strong><br/>
+      <br/>
+      <strong style="color: rgb(29, 112, 189);">Description:</strong> ${pin.description}<br/>
+      <br/>
+      <strong style="color: rgb(29, 112, 189);">Image:</strong> <br/> <img src='${pin.image}' style='height: 200px; width: 100%;' /><br/>
+      ${formText}
+      `;
+
       const marker = L.marker([pin.latitude, pin.longitude]).addTo(map);
       const savedMarker = marker.bindPopup(`
       <strong style="color: rgb(29, 112, 189);">Title:</strong> <strong>${pin.title}</strong><br/>
@@ -49,10 +64,15 @@ $(() => {
           editPin(savedMarker, pin);
         });
       });
+      savedMarker.on('popupclose', () => {
+        setTimeout(() => {
+          savedMarker.bindPopup(fullText);
+        }, 500);
+      });
     });
   };
 
-  const editPin = (marker, pin) => {
+  const editPin = (marker, pin) => { //To edit pins in /maps.
 
     if (!user_id) {
       return marker.bindPopup(`
@@ -82,7 +102,7 @@ $(() => {
 
   };
 
-  const onMapClick = (e) => {
+  const onMapClick = (e) => { //To create a pin whenever a point in the map is clicked.
 
     let popup = L.popup();
     let pinText = `
@@ -109,8 +129,9 @@ $(() => {
       .setLatLng(e.latlng)
       .setContent(pinText)
       .openOn(map);
-  }
+  };
 
+  // Ajax function to grab data from database and trigger map rendering
   $.get('/api/maps/' + map_id).then((res) => {
     const lat = res.requestedMap.latitude;
     const lon = res.requestedMap.longitude;
@@ -119,6 +140,6 @@ $(() => {
     generateMap(lat, lon);
     generatePins(pins);
 
-  })
+  });
 
 });

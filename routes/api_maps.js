@@ -1,25 +1,9 @@
-/*
- * All routes for Users are defined here
- * Since this file is loaded in server.js into /users,
- *   these routes are mounted onto /users
- * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
- */
-
 const express = require('express');
 const { render } = require('sass');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
 const mapQueries = require('../db/queries/maps');
 const pinQueries = require('../db/queries/pins');
-
-// router.get('/properties', (req, res) => {
-//   database.getAllProperties(req.query, 20)
-//   .then(properties => res.send({properties}))
-//   .catch(e => {
-//     console.error(e);
-//     res.send(e)
-//   });
-// });
 
 
 // GET /api/maps/all

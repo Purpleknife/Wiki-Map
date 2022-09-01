@@ -3,10 +3,13 @@ const router  = express.Router();
 const mapQueries = require('../db/queries/maps');
 
 router.post('/:id', (req, res) => { //Setup route for favorite button: to add a fav to user's favorites.
-  //console.log('req.body', req.body);
+
+  if (!req.session.user_id) {
+    return res.send('You cannot add favorite maps until you sign in.');
+  }
+
   const userId = req.session.user_id;
   const mapId = req.params.id;
-  //console.log('mapId', mapId);
 
   mapQueries.addFavMap({...req.body, user_id: userId, map_id: mapId })
     .then(favMap => {
@@ -16,11 +19,14 @@ router.post('/:id', (req, res) => { //Setup route for favorite button: to add a 
 });
 
 router.delete('/:id', (req, res) => { //Setup route to delete a favorite map.
-  //console.log('req.body', req.body);
+
+  if (!req.session.user_id) {
+    return res.send('You cannot remove favorite maps until you sign in.');
+  }
+
   const userId = req.session.user_id;
   const mapId = req.params.id;
-  console.log(userId);
-  console.log(mapId);
+
   mapQueries.deleteFavMap({ user_id: userId, map_id: mapId })
     .then(favMap => {
       return res.redirect('/profile');
