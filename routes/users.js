@@ -80,9 +80,39 @@ router.get('/:id', (req, res) => { //Setup route for login without a form page.
 });
 
 
+
+
+router.post('/register/new', (req, res) => { //Setup route for Register button.
+
+  const usernameList = ['Ryan', 'Nikita', 'Jason', 'Michael', 'Pam'];
+
+  const user = req.body;
+
+  for (let randomUsername of usernameList) {
+    user.username = randomUsername;
+  }
+  user.city = 'Calgary';
+  user.province = 'Alberta';
+  user.password = 'happykitty';
+  user.email = `${user.username}@gmail.com`;
+
+  userQueries.addUser(user)
+  .then(registeredUser => {
+
+    req.session.user_id = registeredUser.id;
+
+    if (req.session.user_id) { //If logged in, redirect.
+      return res.redirect(`/login/${registeredUser.id}`);
+    }
+  })
+  .catch(e => res.send(e));
+});
+
+
 router.post('/', (req, res) => { //Setup route for /logout.
   req.session = null;
   return res.redirect('/');
 });
+
 
 module.exports = router;

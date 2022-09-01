@@ -5,7 +5,9 @@
   <% if (!user.id) { %>
     <div class="functions">
       <a class="btn btn-outline-dark" href="/login/1" role="button">Login</a> &nbsp &nbsp
-      <a class="btn btn-outline-dark" href="/register" role="button">Register</a>
+      <form method="POST" action="/register/new">
+        <button class="btn btn-outline-dark" type="submit">Register</button>
+      </form>
     </div>
       <% } else { %>
     <div class="other-functions">
