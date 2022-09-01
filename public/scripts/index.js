@@ -1,6 +1,6 @@
 $(() => {
 
-
+  const user_id = document.querySelector('.user-id').value;
 
   async function fetchMaps() {
     let data = await (await fetch(`/api/maps/all`)).json();
@@ -14,7 +14,7 @@ $(() => {
 
   const generateMap = (type, map) => {
 
-    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 13);
+    map = L.map(`${type + map.id}`).setView([map.latitude, map.longitude], 10);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       maxZoom: 19,
@@ -27,7 +27,17 @@ $(() => {
 
   const generateHtml = (type, map) => {
 
-    return htmlText = `
+    let optionalText = ``;
+    if (user_id) {
+      optionalText = `
+        <form method="POST" action="/maps/${map.id}">
+        <button type="submit" id="heart-icon" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
+        </form>`;
+    }
+
+
+
+    let htmlText = `
     <div class="col-md-4">
       <div class="card mb-4 shadow-sm">
         <div id="${type + map.id}" style="height: 200px"></div>
@@ -38,17 +48,14 @@ $(() => {
           <form method="GET" action="/maps/${map.id}/">
             <button type="submit" id="view-icon" class="btn btn-sm btn-outline-secondary">View <i class="fa-solid fa-magnifying-glass"></i></button>
           </form>
-          <form method="POST" action="/maps/${map.id}">
-            <button type="submit" id="heart-icon" class="btn btn-sm btn-outline-secondary">Favorite <i class="fa-solid fa-heart"></i></button>
-          </form>
-          <form method="POST" action="/maps/${map.id}?_method=DELETE">
-            <button type="submit" id="remove-icon" class="btn btn-sm btn-outline-secondary">Remove <i class="fa-solid fa-trash-can"></i></button>
-          </form>
+          ${optionalText}
 
         </div>
         <br/>
       </div>
     </div>`;
+
+    return htmlText
 
   }
 
@@ -77,7 +84,8 @@ $(() => {
     });
   };
 
-  fetchMaps()
+  const loadAllMaps = () => {
+    fetchMaps()
     .then(maps => {
 
       maps.requestedMaps.forEach(map => {
@@ -97,12 +105,10 @@ $(() => {
       });
     })
     .catch(error => console.log(error.message));
+  };
+  loadAllMaps();
 
-
-
-
-
-})
+});
 
 
 
