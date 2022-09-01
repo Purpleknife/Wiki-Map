@@ -145,20 +145,16 @@ router.post('/:id/pins', (req, res) => {
 // PUT /api/maps/id/update
 router.put('/:id/update', (req, res) => {
 
-
   const pinId = req.params.id;
   const title = req.body.title;
   const description = req.body.description;
   const image = req.body.image;
   const options = { title, description, image };
 
+  console.log('Editting a pin', options);
+
   pinQueries.updatePins(pinId, options)
   .then(data => {
-
-    const userId = req.session.user_id;
-    console.log('Put edit pin', userId);
-    // mapQueries.addContribution({map_id, user_id})
-    //   .then(addedContribution => console.log(addedContribution))
 
     res.redirect(`/maps/${data.map_id}`);
   })

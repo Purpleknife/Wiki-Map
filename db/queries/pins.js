@@ -58,10 +58,20 @@ const updatePins = (pin_id, options) => {
   queryParams.push(pin_id);
   queryString += `
   WHERE pins.id = $${queryParams.length}
-  RETURNING *;`;
+  RETURNING pins.map_id;`;
+
+  if (!options.title && !options.description && !options.image) {
+    queryString = `
+    SELECT map_id
+    FROM pins
+    WHERE id = $${queryParams.length}`;
+  }
+
+  console.log('Here"s your pin', queryString, queryParams);
 
   return db.query(queryString, queryParams)
     .then(data => {
+      console.log('Here"s your pin', data.rows);
       return data.rows[0];
     })
     .catch(error => console.log(error.message));
