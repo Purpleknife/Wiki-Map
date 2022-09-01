@@ -156,6 +156,25 @@ router.put('/:id/update', (req, res) => {
   pinQueries.updatePins(pinId, options)
   .then(data => {
 
+    const user_id = req.session.user_id;
+    const map_id = data.map_id;
+
+    userQueries.getUserMaps(user_id)
+    .then(cons => {
+      let hasContributed = false;
+
+      cons.forEach(con => {
+        if (con.id == map_id && con.con_user_id == user_id) {
+          hasContributed = true;
+        }
+      });
+
+      if (!hasContributed){
+        mapQueries.addContribution({map_id, user_id})
+          .then(addedContribution => console.log('check', addedContribution))
+      }
+    })
+
     res.redirect(`/maps/${data.map_id}`);
   })
   .catch(error => console.log(error.message));
@@ -168,6 +187,26 @@ router.delete('/:id/delete', (req, res) => {
   pinId = req.params.id;
   pinQueries.deletePin(pinId)
     .then(data => {
+
+      const user_id = req.session.user_id;
+      const map_id = data.map_id;
+
+      userQueries.getUserMaps(user_id)
+      .then(cons => {
+        let hasContributed = false;
+
+        cons.forEach(con => {
+          if (con.id == map_id && con.con_user_id == user_id) {
+            hasContributed = true;
+          }
+        });
+
+        if (!hasContributed){
+          mapQueries.addContribution({map_id, user_id})
+            .then(addedContribution => console.log('check', addedContribution))
+        }
+      })
+
       res.redirect(`/maps/${data.map_id}`);
     })
     .catch(error => console.log(error.message))
