@@ -2,7 +2,9 @@
 
 Wiki Map is an app where you can discover maps depending on your interests: 'Best Dog Parks', 'Best Beach Parks Around Town', etc. It currently shows maps only for: Toronto (Ontario), Calgary (Alberta) and Vancouver (British Columbia).
 
-This is a collaborative project for Lighthouse Labs's Midterms with @Coltonb-boop.
+This is a collaborative project for Lighthouse Labs's Midterms between:
+- [Hind Nayhi](https://github.com/Purpleknife)
+- [Colton Bitz](https://github.com/Coltonb-boop)@Coltonb-boop.
 
 ## Features
 
