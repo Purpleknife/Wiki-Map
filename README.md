@@ -4,7 +4,7 @@ Wiki Map is an app where you can discover maps depending on your interests: 'Bes
 
 This is a collaborative project for Lighthouse Labs's Midterms between:
 - [Hind Nayhi](https://github.com/Purpleknife)
-- [Colton Bitz](https://github.com/Coltonb-boop)@Coltonb-boop.
+- [Colton Bitz](https://github.com/Coltonb-boop)
 
 ## Features
 
